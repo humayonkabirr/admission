@@ -16,6 +16,9 @@ Route::get('findDivName', 'DependableValController@searchDivName')->name('findDi
 Route::get('findDistName/{id}', 'DependableValController@searchDistName')->name('findDistName');
 Route::get('findUpazilasName/{id}', 'DependableValController@searchUpazilaName')->name('findUpazilasName');
 Route::get('findUnionsName/{id}', 'DependableValController@searchUnionName')->name('findUnionsName');
+Route::get('findCityCorporation/{id}', 'DependableValController@findCityCorporation')->name('findCityCorporation');
+Route::get('findThanaName/{id}', 'DependableValController@findThanaName')->name('findThanaName');
+Route::get('findThanaNameWithOutCityCor/{id}', 'DependableValController@findThanaNameWithOutCityCor')->name('findThanaNameWithOutCityCor');
 
 
 Route::get('/verify', 'VerifyController@getVerify')->name('getverify');
@@ -307,7 +310,7 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
 
 
 
-    // Dependable Location DIV-DIST-UPAZila Instittue Bank-Branch 
+    // Dependable Location DIV-DIST-UPAZila Instittue Bank-Branch
     //Route::resource('dependableLocation', 'DependableLocationController');
     // Route::get('/findDistrictName', [DependableLocationController::class, 'findDistrictName'])->name('findDistrictName');
     Route::get('findDistrictName/{id}', 'DependableValueController@findDistrictName')->name('findDistrictName');
