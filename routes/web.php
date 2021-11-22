@@ -57,12 +57,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('divisions', 'DivisionController');
 
     // District
+    Route::get('get-districts/{id}', function($id){
+      return json_encode(App\Models\District::where('division_name_id', $id)->get());
+    });
     Route::delete('districts/destroy', 'DistrictController@massDestroy')->name('districts.massDestroy');
     Route::post('districts/parse-csv-import', 'DistrictController@parseCsvImport')->name('districts.parseCsvImport');
     Route::post('districts/process-csv-import', 'DistrictController@processCsvImport')->name('districts.processCsvImport');
     Route::resource('districts', 'DistrictController');
 
     // Thana
+    Route::get('get-upazilas/{id}', function($id){
+      return json_encode(App\Models\Upazila::where('district_id', $id)->get());
+    });
     Route::delete('thanas/destroy', 'ThanaController@massDestroy')->name('thanas.massDestroy');
     Route::post('thanas/parse-csv-import', 'ThanaController@parseCsvImport')->name('thanas.parseCsvImport');
     Route::post('thanas/process-csv-import', 'ThanaController@processCsvImport')->name('thanas.processCsvImport');
@@ -213,6 +219,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('banking-types/parse-csv-import', 'BankingTypeController@parseCsvImport')->name('banking-types.parseCsvImport');
     Route::post('banking-types/process-csv-import', 'BankingTypeController@processCsvImport')->name('banking-types.processCsvImport');
     Route::resource('banking-types', 'BankingTypeController');
+
+    // Primary Selection
+    Route::delete('primary-selections/destroy', 'PrimarySelectionController@massDestroy')->name('primary-selections.massDestroy');
+    Route::get('primary-selections/app-number-id/{id}', 'PrimarySelectionController@app_number')->name('primary-selections.app_number');
+    Route::post('primary-selections/check/{id}', 'PrimarySelectionController@get_result')->name('primary-selections.get_result');
+    Route::resource('primary-selections', 'PrimarySelectionController');
+
+    // Primary Selection Criteria
+    Route::delete('primary-selection-criteria/destroy', 'PrimarySelectionCriteriaController@massDestroy')->name('primary-selection-criteria.massDestroy');
+    Route::post('primary-selection-criteria/parse-csv-import', 'PrimarySelectionCriteriaController@parseCsvImport')->name('primary-selection-criteria.parseCsvImport');
+    Route::post('primary-selection-criteria/process-csv-import', 'PrimarySelectionCriteriaController@processCsvImport')->name('primary-selection-criteria.processCsvImport');
+    Route::resource('primary-selection-criteria', 'PrimarySelectionCriteriaController');
 
     // Final Selection
     Route::delete('final-selections/destroy', 'FinalSelectionController@massDestroy')->name('final-selections.massDestroy');

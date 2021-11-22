@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ trans('panel.site_title') }}</title>
+    <link rel="icon" type="image/x-icon" href="{!! asset('assets/img/resized-image-Promo.jpeg') !!}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -24,7 +25,7 @@
 
 
     <style>
-        @media (max-width: 768px) {
+        @media(max-width: 768px) {
 
             #companyNameLogo {
                 display: none;
@@ -32,7 +33,7 @@
 
         }
 
-        @media (min-width: 768px) {
+        @media(min-width: 768px) {
 
             #companyNameLogo {
                 display: block;
@@ -42,6 +43,7 @@
         }
     </style>
     @yield('styles')
+
 </head>
 
 <body class="sidebar-mini skin-red" style="height: auto; min-height: 100%;">
@@ -159,9 +161,12 @@
                                             @foreach($alerts as $alert)
                                             <li>
                                                 <a href="{{ $alert->alert_link ? $alert->alert_link : "#" }}" target="_blank" rel="noopener noreferrer">
-                                                    @if($alert->pivot->read === 0) <strong> @endif
-                                                        {{ $alert->alert_text }}
-                                                        @if($alert->pivot->read === 0) </strong> @endif
+                                                    @if($alert->pivot->read === 0) <strong>
+                                                            @endif
+                                                            {{ $alert->alert_text }}
+                                                            @if($alert->pivot->read === 0)
+                                                        </strong>
+                                                        @endif
                                                 </a>
                                             </li>
                                             @endforeach
@@ -181,6 +186,12 @@
                 </div>
 
             </nav>
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+                <span class="close">&times;</span>
+                <img class="modal-content" id="img01">
+                <div id="caption"></div>
+            </div>
         </header>
 
         @include('partials.menu')
@@ -194,19 +205,19 @@
             </div>
             @endif
             @if($errors->count() > 0)
-            <div class="row" style='padding:20px 20px 0 20px;'>
-                <div class="col-lg-12">
-                    <div class="alert alert-danger">
-                        <ul class="list-unstyled">
-                            @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+                <div class="row" style='padding:20px 20px 0 20px;'>
+                    <div class="col-lg-12">
+                        <div class="alert alert-danger">
+                            <ul class="list-unstyled">
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-            @endif
-            @yield('content')
+                @endif
+                @yield('content')
         </div>
         <footer class="main-footer text-center">
             <strong>{{ trans('panel.site_title') }} &copy;</strong> {{ trans('global.allRightsReserved') }}
@@ -216,6 +227,9 @@
             {{ csrf_field() }}
         </form>
     </div>
+
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
