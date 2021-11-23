@@ -33,6 +33,7 @@
         body {
             min-height: 75rem;
             padding-top: 4.5rem;
+            background-image: url('{{ asset("assets/gov-bg.png") }}');
         }
 
         .navbar-brand .nav-link {
@@ -49,6 +50,9 @@
             background-color: white;
         }
 
+        .logo-lg{
+            margin-right: 30px;
+        }
 
 
         /* End of loading Animation css */
@@ -61,8 +65,10 @@
 
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light fixed-top bg-gray">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+            <a href="{{ url('/') }}" class="logo">
+                <span class="logo-lg">
+                    <img id="companyNameLogo" style="background-color: while !important;" src="{{asset('public/images/aams-logo-big.png')}}" alt="PMEAT LOGO">
+                </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -275,7 +281,8 @@
                         </div>
                     </li>
 
-                    @endcan @can('setup_access')
+                    @endcan
+                    @can('setup_access')
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ trans('cruds.setup.title') }} <span class="caret"></span>
@@ -462,21 +469,21 @@
             </div>
             @endif
             @if($errors->count() > 0)
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-danger">
-                            <ul class="list-unstyled mb-0">
-                                @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger">
+                                <ul class="list-unstyled mb-0">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                        @endforeach
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            @endif
-            @yield('content')
+                @endif
+                @yield('content')
 
         </main>
 

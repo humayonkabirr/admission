@@ -16,6 +16,10 @@ Route::get('findDivName', 'DependableValController@searchDivName')->name('findDi
 Route::get('findDistName/{id}', 'DependableValController@searchDistName')->name('findDistName');
 Route::get('findUpazilasName/{id}', 'DependableValController@searchUpazilaName')->name('findUpazilasName');
 Route::get('findUnionsName/{id}', 'DependableValController@searchUnionName')->name('findUnionsName');
+Route::get('findUnionsNameWithOutPor/{id}', 'DependableValController@findUnionsNameWithOutPor')->name('findUnionsNameWithOutPor');
+Route::get('findCityCorporation/{id}', 'DependableValController@findCityCorporation')->name('findCityCorporation');
+Route::get('findThanaName/{id}', 'DependableValController@findThanaName')->name('findThanaName');
+Route::get('findThanaNameWithOutCityCor/{id}', 'DependableValController@findThanaNameWithOutCityCor')->name('findThanaNameWithOutCityCor');
 
 
 Route::get('/verify', 'VerifyController@getVerify')->name('getverify');
@@ -54,12 +58,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('divisions', 'DivisionController');
 
     // District
+    Route::get('get-districts/{id}', function($id){
+      return json_encode(App\Models\District::where('division_name_id', $id)->get());
+    });
     Route::delete('districts/destroy', 'DistrictController@massDestroy')->name('districts.massDestroy');
     Route::post('districts/parse-csv-import', 'DistrictController@parseCsvImport')->name('districts.parseCsvImport');
     Route::post('districts/process-csv-import', 'DistrictController@processCsvImport')->name('districts.processCsvImport');
     Route::resource('districts', 'DistrictController');
 
     // Thana
+    Route::get('get-upazilas/{id}', function($id){
+      return json_encode(App\Models\Upazila::where('district_id', $id)->get());
+    });
     Route::delete('thanas/destroy', 'ThanaController@massDestroy')->name('thanas.massDestroy');
     Route::post('thanas/parse-csv-import', 'ThanaController@parseCsvImport')->name('thanas.parseCsvImport');
     Route::post('thanas/process-csv-import', 'ThanaController@processCsvImport')->name('thanas.processCsvImport');
@@ -211,6 +221,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('banking-types/process-csv-import', 'BankingTypeController@processCsvImport')->name('banking-types.processCsvImport');
     Route::resource('banking-types', 'BankingTypeController');
 
+    // Primary Selection
+    Route::delete('primary-selections/destroy', 'PrimarySelectionController@massDestroy')->name('primary-selections.massDestroy');
+    Route::get('primary-selections/app-number-id/{id}', 'PrimarySelectionController@app_number')->name('primary-selections.app_number');
+    Route::post('primary-selections/check/{id}', 'PrimarySelectionController@get_result')->name('primary-selections.get_result');
+    Route::resource('primary-selections', 'PrimarySelectionController');
+
+    // Primary Selection Criteria
+    Route::delete('primary-selection-criteria/destroy', 'PrimarySelectionCriteriaController@massDestroy')->name('primary-selection-criteria.massDestroy');
+    Route::post('primary-selection-criteria/parse-csv-import', 'PrimarySelectionCriteriaController@parseCsvImport')->name('primary-selection-criteria.parseCsvImport');
+    Route::post('primary-selection-criteria/process-csv-import', 'PrimarySelectionCriteriaController@processCsvImport')->name('primary-selection-criteria.processCsvImport');
+    Route::resource('primary-selection-criteria', 'PrimarySelectionCriteriaController');
+
     // Final Selection
     Route::delete('final-selections/destroy', 'FinalSelectionController@massDestroy')->name('final-selections.massDestroy');
     Route::resource('final-selections', 'FinalSelectionController');
@@ -307,7 +329,7 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
 
 
 
-    // Dependable Location DIV-DIST-UPAZila Instittue Bank-Branch 
+    // Dependable Location DIV-DIST-UPAZila Instittue Bank-Branch
     //Route::resource('dependableLocation', 'DependableLocationController');
     // Route::get('/findDistrictName', [DependableLocationController::class, 'findDistrictName'])->name('findDistrictName');
     Route::get('findDistrictName/{id}', 'DependableValueController@findDistrictName')->name('findDistrictName');
