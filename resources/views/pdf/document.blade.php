@@ -126,11 +126,11 @@
             <table>
                 <tr>
                     <td style="width: 50%">
-                        <img src="https://seeklogo.com/images/G/govt-bangladesh-logo-D1143C363F-seeklogo.com.png" height="50px" alt="logo">
+                        <img src="{{url('/public/images/aams-logo-big.png')}}" alt="Image" height="50px" />
                     </td>
                     <td>
                         <span style="float: right">
-                            Application Id: {{ $general_info->application_no }}
+                            আবেদন নম্বর: {{ $general_info->application_no }}
                         </span>
                     </td>
 
