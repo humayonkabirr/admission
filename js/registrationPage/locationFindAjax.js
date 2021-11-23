@@ -251,6 +251,7 @@ function getUpazila(id) {
 }
 
 //  Union ajax  call function
+
 function getUnion(id) {
 	var base_url = window.location.origin;
 	// let url = '{{url("/student/findUnionName")}}';
