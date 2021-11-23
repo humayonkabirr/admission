@@ -82,18 +82,28 @@ $(document).on("change", "#O_district_id", function() {
 
 $(document).on("change", "#upazila_id", function() {
 	let upazila_id = $(this).val();
+	let mcu_type = $('#mcu_type').val();
 	if (upazila_id == "") {
 		upazila_id = 0;
 	}
-	getUnion(upazila_id);
+	if (mcu_type == 2) {
+		findUnionsNameWithOutPor(upazila_id);
+	} else {
+		getUnion(upazila_id);
+	}
 });
 
 $(document).on("change", "#O_upazila_id", function() {
 	let upazila_id = $(this).val();
+	let mcu_type = $('#mcu_type').val();
 	if (upazila_id == "") {
 		upazila_id = 0;
 	}
-	getUnion(upazila_id);
+	if (mcu_type == 2) {
+		getUnion(upazila_id);
+	} else {
+		findUnionsNameWithOutPor(upazila_id);
+	}
 });
 
 function getCityCorporation(id) {
@@ -256,6 +266,33 @@ function getUnion(id) {
 	var base_url = window.location.origin;
 	// let url = '{{url("/student/findUnionName")}}';
 	let url = base_url + "/admission/findUnionsName";
+	let unionUrl = url + "/" + id;
+
+	let output = "";
+	$.get(unionUrl)
+		.always(function() {
+			$("#union_id").find("*").not("#nullValueOption").remove();
+			$("#O_union_id").find("*").not("#nullValueOption").remove();
+		})
+		.done(function(data) {
+			console.log(data);
+			for (var i = 0; i < data.length; i++) {
+				output +=
+					'<option value="' +
+					data[i].id +
+					'">' +
+					data[i].union_name +
+					"</option>";
+			}
+			$("#union_id").append(output);
+			$("#O_union_id").append(output);
+		});
+}
+
+function findUnionsNameWithOutPor(id) {
+	var base_url = window.location.origin;
+	// let url = '{{url("/student/findUnionName")}}';
+	let url = base_url + "/admission/findUnionsNameWithOutPor";
 	let unionUrl = url + "/" + id;
 
 	let output = "";

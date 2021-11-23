@@ -16,6 +16,7 @@ Route::get('findDivName', 'DependableValController@searchDivName')->name('findDi
 Route::get('findDistName/{id}', 'DependableValController@searchDistName')->name('findDistName');
 Route::get('findUpazilasName/{id}', 'DependableValController@searchUpazilaName')->name('findUpazilasName');
 Route::get('findUnionsName/{id}', 'DependableValController@searchUnionName')->name('findUnionsName');
+Route::get('findUnionsNameWithOutPor/{id}', 'DependableValController@findUnionsNameWithOutPor')->name('findUnionsNameWithOutPor');
 Route::get('findCityCorporation/{id}', 'DependableValController@findCityCorporation')->name('findCityCorporation');
 Route::get('findThanaName/{id}', 'DependableValController@findThanaName')->name('findThanaName');
 Route::get('findThanaNameWithOutCityCor/{id}', 'DependableValController@findThanaNameWithOutCityCor')->name('findThanaNameWithOutCityCor');

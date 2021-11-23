@@ -46,6 +46,12 @@
         width: 100% !important;
 
     }
+
+    .container .row {
+        background: #ffffff;
+        box-shadow: 1px 1px 13px #938e8eb5;
+        padding: 15px 0px 15px 0px;
+    }
 </style>
 @endsection
 
@@ -55,7 +61,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default" style=" 
+            <div class="panel panel-default" style="
                 color:green;">
 
                 <div class="panel-heading">
@@ -64,7 +70,7 @@
                 </div>
                 <div class="panel-body">
                     <p class="header-note"> [*] চিহ্নিত ঘরগুলো অবশ্যই পূরণ করতে হবে। সকল তথ্য ইউনিকোড বাংলায় পূরণ করুন। </p>
-                    <form method="POST" action="{{ route('frontend.application.store') }}" enctype="multipart/form-data" class="was-validated" oninput='mother_nid.setCustomValidity(mother_nid.value == father_nid.value ? "NID will not match." : ""), 
+                    <form method="POST" action="{{ route('frontend.application.store') }}" enctype="multipart/form-data" class="was-validated" oninput='mother_nid.setCustomValidity(mother_nid.value == father_nid.value ? "NID will not match." : ""),
                     last_gpa.setCustomValidity(last_gpa_total.value < last_gpa.value ? "Invalid Input" : "")' onchange='last_gpa_total.setCustomValidity(last_gpa_total.value < last_gpa.value ? "Invalid Input" : "")' autocomplete="off">
                         @csrf
                         <fieldset class="border">
@@ -85,30 +91,34 @@
                                         @endif
                                     </select>
                                     @if($errors->has('circular'))
-                                    <span class="help-block" role="alert">{{ $errors->first('circular') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.generalInfo.fields.circular_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('circular') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.generalInfo.fields.circular_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
                                 <div class="col-md-6{{ $errors->has('brid') ? 'has-error' : '' }}">
                                     <label class="required" for="brid">{{ trans('cruds.generalInfo.fields.brid') }}</label>
-                                    <input class="form-control" type="text" name="brid" id="brid" value="{{$userData->brid}}" minlength="10" maxlength="10" pattern="(.){10,17}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 " onKeyDown="if (this.value.length==10 && event.keyCode!=8) return false" required placeholder="১৭ ডিজিটের জন্ম সনদ নম্বর দিন " readonly>
+                                    <input class="form-control" type="text" name="brid" id="brid" value="{{$userData->brid}}" minlength="10" maxlength="10" pattern="(.){10,17}"
+                                     onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 " onKeyDown="if (this.value.length==10 && event.keyCode!=8) return false" required
+                                     placeholder="১৭ ডিজিটের জন্ম সনদ নম্বর দিন " readonly>
 
                                     @if($errors->has('brid'))
-                                    <span class="help-block" role="alert">{{ $errors->first('brid') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.generalInfo.fields.brid_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.write_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('brid') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.generalInfo.fields.brid_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.write_something')}}</div>
                                 </div>
 
 
                                 <div class="col-md-6 {{ $errors->has('nid') ? 'has-error' : '' }}">
                                     <label for="nid">{{ trans('cruds.generalInfo.fields.nid') }} [যদি থাকে]</label>
-                                    <input class="form-control" type="number" name="nid" id="nid" value="{{$userData->nid?$userData->nid:''}}" minlength="10" maxlength="17" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 " onKeyDown="if (this.value.length==17 && event.keyCode!=8) return false" required placeholder="১০  অথবা ১৭ ডিজিটের জাতীয় পরিচয়পত্র নম্বর দিন ">
+                                    <input class="form-control" type="text" name="nid" id="nid" value="{{$userData->nid?$userData->nid:''}}" minlength="10" maxlength="17"
+                                     onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 " onKeyDown="if (this.value.length==17 && event.keyCode!=8) return false"
+                                     placeholder="১০  অথবা ১৭ ডিজিটের জাতীয় পরিচয়পত্র নম্বর দিন ">
                                     @if($errors->has('nid'))
-                                    <span class="help-block" role="alert">{{ $errors->first('nid') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.generalInfo.fields.nid_helper') }}</span>
+                                        <span class="help-block" role="alert">{{ $errors->first('nid') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.generalInfo.fields.nid_helper') }}</span>
 
                                 </div>
 
@@ -116,56 +126,64 @@
                                     <label class="required" for="stu_name">{{ trans('cruds.generalInfo.fields.name') }}</label>
                                     <input class="form-control" type="text" name="stu_name" id="stu_name" value="{{   $userData->name  }}" readonly required>
                                     @if($errors->has('stu_name'))
-                                    <span class="help-block" role="alert">{{ $errors->first('stu_name') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.generalInfo.fields.name_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.write_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('stu_name') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.generalInfo.fields.name_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.write_something')}}</div>
                                 </div>
 
 
                                 <div class="col-md-6 {{ $errors->has('father_name') ? 'has-error' : '' }}">
                                     <label class="required" for="father_name">{{ trans('cruds.generalInfo.fields.father_name') }}</label>
-                                    <input class="form-control" type="text" name="father_name" id="father_name" value="{{ old('father_name', '') }}" onkeypress="return (event.charCode >= 231 ||  event.charCode == 46 || event.charCode == 32||event.charCode == 0)" onKeyDown="if (this.value.length==50 && event.keyCode!=8 && event.keyCode>=231) return false" required>
+                                    <input class="form-control" type="text" name="father_name" id="father_name" value="{{ old('father_name', '') }}"
+                                     onkeypress="return (event.charCode >= 231 ||  event.charCode == 46 || event.charCode == 32||event.charCode == 0)" onKeyDown="if (this.value.length==50 && event.keyCode!=8 && event.keyCode>=231) return false"
+                                     required>
                                     @if($errors->has('father_name'))
-                                    <span class="help-block" role="alert">{{ $errors->first('father_name') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.generalInfo.fields.father_name_helper') }}</span>
+                                        <span class="help-block" role="alert">{{ $errors->first('father_name') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.generalInfo.fields.father_name_helper') }}</span>
 
-                                    <div class="invalid-feedback">{{trans('global.write_something')}}</div>
+                                        <div class="invalid-feedback">{{trans('global.write_something')}}</div>
                                 </div>
 
 
                                 <div class="col-md-6{{ $errors->has('father_nid') ? 'has-error' : '' }}">
                                     <label for="father_nid">{{ trans('cruds.generalInfo.fields.father_nid') }}</label>
-                                    <input class="form-control" type="number" name="father_nid" id="father_nid" value="{{ old('father_nid', '') }}" step="1" minlength="10" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 " onKeyDown="if (this.value.length==17 && event.keyCode!=8) return false" placeholder="১০ অথবা ১৭ ডিজিটের জাতীয় পরিচয়পত্র নম্বর ">
+                                    <input class="form-control" type="text" name="father_nid" id="father_nid" value="{{ old('father_nid', '') }}" step="1" minlength="10"
+                                     onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 " onKeyDown="if (this.value.length==17 && event.keyCode!=8) return false"
+                                     placeholder="১০ অথবা ১৭ ডিজিটের জাতীয় পরিচয়পত্র নম্বর ">
                                     @if($errors->has('father_nid'))
-                                    <span class="help-block" role="alert">{{ $errors->first('father_nid') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.generalInfo.fields.father_nid_helper') }}</span>
+                                        <span class="help-block" role="alert">{{ $errors->first('father_nid') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.generalInfo.fields.father_nid_helper') }}</span>
 
                                 </div>
 
 
                                 <div class="col-md-6 {{ $errors->has('mother_name') ? 'has-error' : '' }}">
                                     <label class="required" for="mother_name">{{ trans('cruds.generalInfo.fields.mother_name') }}</label>
-                                    <input class="form-control" type="text" name="mother_name" id="mother_name" value="{{ old('mother_name', '') }}" onkeypress="return (event.charCode >= 231 ||  event.charCode == 46 || event.charCode == 32||event.charCode == 0)" onKeyDown="if (this.value.length==50 && event.keyCode!=8 && event.keyCode>=231) return false" required>
+                                    <input class="form-control" type="text" name="mother_name" id="mother_name" value="{{ old('mother_name', '') }}"
+                                     onkeypress="return (event.charCode >= 231 ||  event.charCode == 46 || event.charCode == 32||event.charCode == 0)" onKeyDown="if (this.value.length==50 && event.keyCode!=8 && event.keyCode>=231) return false"
+                                     required>
                                     @if($errors->has('mother_name'))
-                                    <span class="help-block" role="alert">{{ $errors->first('mother_name') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.generalInfo.fields.mother_name_helper') }}</span>
+                                        <span class="help-block" role="alert">{{ $errors->first('mother_name') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.generalInfo.fields.mother_name_helper') }}</span>
 
-                                    <div class="invalid-feedback">{{trans('global.write_something')}}</div>
+                                        <div class="invalid-feedback">{{trans('global.write_something')}}</div>
                                 </div>
 
 
                                 <div class="col-md-6 {{ $errors->has('mother_nid') ? 'has-error' : '' }}">
                                     <label for="mother_nid">{{ trans('cruds.generalInfo.fields.mother_nid') }}</label>
-                                    <input class="form-control" type="number" name="mother_nid" id="mother_nid" value="{{ old('mother_nid', '') }}" step="1" oninvalid="this.setCustomValidity('Please Change NID')" oninput='setCustomValidity(mother_nid.value == father_nid.value)' minlength="10" maxlength="17" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 " onKeyDown="if (this.value.length==17 && event.keyCode!=8) return false" placeholder="১০ অথবা ১৭ ডিজিটের জাতীয় পরিচয়পত্র নম্বর">
+                                    <input class="form-control" type="text" name="mother_nid" id="mother_nid" value="{{ old('mother_nid', '') }}" step="1" oninvalid="this.setCustomValidity('Please Change NID')"
+                                     oninput='setCustomValidity(mother_nid.value == father_nid.value)' minlength="10" maxlength="17" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 "
+                                     onKeyDown="if (this.value.length==17 && event.keyCode!=8) return false" placeholder="১০ অথবা ১৭ ডিজিটের জাতীয় পরিচয়পত্র নম্বর">
                                     @if($errors->has('mother_nid'))
-                                    <span class="help-block" role="alert">{{ $errors->first('mother_nid') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.generalInfo.fields.mother_nid_helper') }}</span>
-                                    <div class="invalid-feedback">পিতা ও মাতার জাতীয় পরিচয়পত্র নম্বর ভিন্ন হতে হবে/ অন্তত যেকোন একজনের এনআইডি লিখুন</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('mother_nid') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.generalInfo.fields.mother_nid_helper') }}</span>
+                                        <div class="invalid-feedback">পিতা ও মাতার জাতীয় পরিচয়পত্র নম্বর ভিন্ন হতে হবে/ অন্তত যেকোন একজনের এনআইডি লিখুন</div>
                                 </div>
 
 
@@ -174,18 +192,21 @@
                                     <input class="form-control" type="date" name="dob" id="dob2" value="{{ old('dob') }}" min='1899-01-01' max='2000-13-13' required>
 
                                     @if($errors->has('dob'))
-                                    <span class="help-block" role="alert">{{ $errors->first('dob') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.generalInfo.fields.dob_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.write_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('dob') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.generalInfo.fields.dob_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.write_something')}}</div>
                                 </div>
 
-                              
 
 
-                                @php $district = App\Models\District::where('division_name_id',old('division_id'))->get(); @endphp
-                                @php $upazila = App\Models\Upazila::where('district_id',old('districts_id'))->get(); @endphp
-                                @php $union = App\Models\Union::where('upazila_id',old('upazila_id'))->get(); @endphp
+
+                                @php $district = App\Models\District::where('division_name_id',old('division_id'))->get();
+                                @endphp
+                                @php $upazila = App\Models\Upazila::where('district_id',old('districts_id'))->get();
+                                @endphp
+                                @php $union = App\Models\Union::where('upazila_id',old('upazila_id'))->get();
+                                @endphp
 
 
                                 <div class="col-md-6 {{ $errors->has('division') ? 'has-error' : '' }}">
@@ -197,116 +218,118 @@
                                         @endforeach
                                     </select>
                                     @if($errors->has('division'))
-                                    <span class="help-block" role="alert">{{ $errors->first('division') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.generalInfo.fields.division_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
-                                </div>
-
-                                    <div class="col-md-6 {{ $errors->has('district') ? 'has-error' : '' }}">
-                                        <label class="required" for="district_id">{{ trans('cruds.generalInfo.fields.district') }}</label>
-                                        <select class="form-control select2" name="district_id" id="district_id" required>
-                                            <option id="nullValueOption" value=''> {{ trans('global.pleaseSelect') }}
-                                            </option>
-                                            @if (old('division_id'))
-                                            @foreach ($district as $data)
-                                            <option value='{{ $data->id }}' {{ $data->id == old('districts_id') ? 'selected' : '' }}>
-                                                {{ $data->district_name }}
-                                            </option>
-                                            @endforeach
-                                            @endif
-
-
-                                        </select>
-                                        @if ($errors->has('district'))
-                                        <span class="help-block" role="alert">{{ $errors->first('district') }}</span>
-                                        @endif
-                                        <span class="help-block">{{ trans('cruds.generalInfo.fields.district_helper') }}</span>
-                                    </div>
-
-
-                                    <div class="col-md-6 {{ $errors->has('division') ? 'has-error' : '' }}">
-                                        <label class="required" for="mcu_type">পৌরসভা/কর্পোরেশন/উপজেলা নির্বাচন করুন</label>
-                                        <select class="form-control select2" name="mcu_type" id="mcu_type" required>
-                                            <option id="nullValueOption" value='' selected='selected'>
-                                                {{ trans('global.pleaseSelect') }}
-                                            </option>
-                                            @foreach ($mcu_types as $key => $value)
-                                            <option value='{{$value->id}}'>{{$value->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        @if ($errors->has('division'))
                                         <span class="help-block" role="alert">{{ $errors->first('division') }}</span>
                                         @endif
                                         <span class="help-block">{{ trans('cruds.generalInfo.fields.division_helper') }}</span>
-                                    </div>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                </div>
 
-                                    <div class="col-md-6 {{ $errors->has('city_name') ? 'has-error' : '' }}">
-                                        <label class="required" for="city_name">সিটি কর্পোরেশন</label>
-                                        <select class="form-control select2" name="city_name" id="city_name" required>
-                                            <option id="nullValueOption" value="" selected='selected'>{{ trans('global.pleaseSelect') }}</option>
-
-                                        </select>
-                                        @if ($errors->has('city_name'))
-                                        <span class="help-block" role="alert">{{ $errors->first('city_name') }}</span>
+                                <div class="col-md-6 {{ $errors->has('district') ? 'has-error' : '' }}">
+                                    <label class="required" for="district_id">{{ trans('cruds.generalInfo.fields.district') }}</label>
+                                    <select class="form-control select2" name="district_id" id="district_id" required>
+                                        <option id="nullValueOption" value=''> {{ trans('global.pleaseSelect') }}
+                                        </option>
+                                        @if (old('division_id'))
+                                        @foreach ($district as $data)
+                                        <option value='{{ $data->id }}' {{ $data->id == old('districts_id') ? 'selected' : '' }}>
+                                            {{ $data->district_name }}
+                                        </option>
+                                        @endforeach
                                         @endif
-                                        <span class="help-block">{{ trans('cruds.generalInfo.fields.division_helper') }}</span>
-                                    </div>
 
-                                    <div class="col-md-6 {{ $errors->has('upazila') ? 'has-error' : '' }}">
-                                        <label class="required" for="upazila_id">{{ trans('cruds.generalInfo.fields.upazila') }}/পোরসভা</label>
-                                        <select class="form-control select2" name="upazila_id" id="upazila_id" required>
 
-                                            <option id="nullValueOption" value='' selected='selected'>
-                                                {{ trans('global.pleaseSelect') }}
-                                            </option>
-                                            @if (old('division_id'))
-                                            @foreach ($upazila as $data)
-                                            <option value='{{ $data->id }}' {{ $data->id == old('upazila_id') ? 'selected' : '' }}>
-                                                {{ $data->upazila_name }}
-                                            </option>
-                                            @endforeach
-                                            @endif
-                                        </select>
+                                    </select>
+                                    @if ($errors->has('district'))
+                                    <span class="help-block" role="alert">{{ $errors->first('district') }}</span>
+                                    @endif
+                                    <span class="help-block">{{ trans('cruds.generalInfo.fields.district_helper') }}</span>
+                                </div>
 
-                                        </select>
-                                        @if ($errors->has('upazila'))
-                                        <span class="help-block" role="alert">{{ $errors->first('upazila') }}</span>
+
+                                <div class="col-md-6 {{ $errors->has('division') ? 'has-error' : '' }}">
+                                    <label class="required" for="mcu_type">পৌরসভা/কর্পোরেশন/উপজেলা নির্বাচন করুন</label>
+                                    <select class="form-control select2" name="mcu_type" id="mcu_type" required>
+                                        <option id="nullValueOption" value='' selected='selected'>
+                                            {{ trans('global.pleaseSelect') }}
+                                        </option>
+                                        @foreach ($mcu_types as $key => $value)
+                                        <option value='{{$value->id}}'>{{$value->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('division'))
+                                    <span class="help-block" role="alert">{{ $errors->first('division') }}</span>
+                                    @endif
+                                    <span class="help-block">{{ trans('cruds.generalInfo.fields.division_helper') }}</span>
+                                </div>
+
+                                <div class="col-md-6 {{ $errors->has('city_name') ? 'has-error' : '' }}">
+                                    <label class="required" for="city_name">সিটি কর্পোরেশন</label>
+                                    <select class="form-control select2" name="city_name" id="city_name" required>
+                                        <option id="nullValueOption" value="" selected='selected'>{{ trans('global.pleaseSelect') }}</option>
+
+                                    </select>
+                                    @if ($errors->has('city_name'))
+                                    <span class="help-block" role="alert">{{ $errors->first('city_name') }}</span>
+                                    @endif
+                                    <span class="help-block">{{ trans('cruds.generalInfo.fields.division_helper') }}</span>
+                                </div>
+
+                                <div class="col-md-6 {{ $errors->has('upazila') ? 'has-error' : '' }}">
+                                    <label class="required" for="upazila_id">{{ trans('cruds.generalInfo.fields.upazila') }}/পোরসভা</label>
+                                    <select class="form-control select2" name="upazila_id" id="upazila_id" required>
+
+                                        <option id="nullValueOption" value='' selected='selected'>
+                                            {{ trans('global.pleaseSelect') }}
+                                        </option>
+                                        @if (old('division_id'))
+                                        @foreach ($upazila as $data)
+                                        <option value='{{ $data->id }}' {{ $data->id == old('upazila_id') ? 'selected' : '' }}>
+                                            {{ $data->upazila_name }}
+                                        </option>
+                                        @endforeach
                                         @endif
-                                        <span class="help-block">{{ trans('cruds.generalInfo.fields.upazila_helper') }}</span>
-                                    </div>
+                                    </select>
+
+                                    </select>
+                                    @if ($errors->has('upazila'))
+                                    <span class="help-block" role="alert">{{ $errors->first('upazila') }}</span>
+                                    @endif
+                                    <span class="help-block">{{ trans('cruds.generalInfo.fields.upazila_helper') }}</span>
+                                </div>
 
 
-                                    <div class="col-md-6 {{ $errors->has('union') ? 'has-error' : '' }}">
-                                        <label class="required" for="union_id">{{ trans('cruds.generalInfo.fields.union') }}/ওয়ার্ড</label>
-                                        <select class="form-control select2" name="union_id" id="union_id" required>
+                                <div class="col-md-6 {{ $errors->has('union') ? 'has-error' : '' }}">
+                                    <label class="required" for="union_id">{{ trans('cruds.generalInfo.fields.union') }}/ওয়ার্ড</label>
+                                    <select class="form-control select2" name="union_id" id="union_id" required>
 
-                                            <option id="nullValueOption" value='' selected='selected'>
-                                                {{ trans('global.pleaseSelect') }}
-                                            </option>
-                                            @if (old('union_id'))
-                                            @foreach ($union as $data)
-                                            <option value='{{ $data->id }}' {{ $data->id == old('union_id') ? 'selected' : '' }}>
-                                                {{ $data->union_name }}
-                                            </option>
-                                            @endforeach
-                                            @endif
-                                        </select>
-                                        @if ($errors->has('union'))
-                                        <span class="help-block" role="alert">{{ $errors->first('union') }}</span>
+                                        <option id="nullValueOption" value='' selected='selected'>
+                                            {{ trans('global.pleaseSelect') }}
+                                        </option>
+                                        @if (old('union_id'))
+                                        @foreach ($union as $data)
+                                        <option value='{{ $data->id }}' {{ $data->id == old('union_id') ? 'selected' : '' }}>
+                                            {{ $data->union_name }}
+                                        </option>
+                                        @endforeach
                                         @endif
-                                        <span class="help-block">{{ trans('cruds.generalInfo.fields.union_helper') }}</span>
-                                    </div>
+                                    </select>
+                                    @if ($errors->has('union'))
+                                    <span class="help-block" role="alert">{{ $errors->first('union') }}</span>
+                                    @endif
+                                    <span class="help-block">{{ trans('cruds.generalInfo.fields.union_helper') }}</span>
+                                </div>
 
 
                                 <div class="col-md-6 {{ $errors->has('village') ? 'has-error' : '' }}">
                                     <label class="required" for="village">{{ trans('cruds.generalInfo.fields.village') }}</label>
-                                    <input class="form-control" type="text" name="village_id" id="village_id" value="{{ old('village_id', '') }}" onkeypress="return (event.charCode >= 231 ||  event.charCode == 46 || event.charCode == 32||event.charCode == 0)" onKeyDown="if (this.value.length==10 && event.keyCode!=8 && event.keyCode>=231) return false" required>
+                                    <input class="form-control" type="text" name="village_id" id="village_id" value="{{ old('village_id', '') }}"
+                                     onkeypress="return (event.charCode >= 231 ||  event.charCode == 46 || event.charCode == 32||event.charCode == 0)" onKeyDown="if (this.value.length==10 && event.keyCode!=8 && event.keyCode>=231) return false"
+                                     required>
                                     @if($errors->has('village'))
-                                    <span class="help-block" role="alert">{{ $errors->first('village') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.generalInfo.fields.village_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.write_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('village') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.generalInfo.fields.village_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.write_something')}}</div>
                                 </div>
 
                             </div>
@@ -326,10 +349,10 @@
                                         @endforeach
                                     </select>
                                     @if($errors->has('familystatus'))
-                                    <span class="help-block" role="alert">{{ $errors->first('familystatus') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.familyInfo.fields.familystatus_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('familystatus') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.familyInfo.fields.familystatus_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
 
                                 <div class="col-md-6 {{ $errors->has('guardian_occupation') ? 'has-error' : '' }}">
@@ -340,10 +363,10 @@
                                         @endforeach
                                     </select>
                                     @if($errors->has('guardian_occupation'))
-                                    <span class="help-block" role="alert">{{ $errors->first('guardian_occupation') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.familyInfo.fields.guardian_occupation_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('guardian_occupation') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.familyInfo.fields.guardian_occupation_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
 
                                 <div class="col-md-6 {{ $errors->has('guardian_education') ? 'has-error' : '' }}">
@@ -355,43 +378,46 @@
                                         @endforeach
                                     </select>
                                     @if($errors->has('guardian_education'))
-                                    <span class="help-block" role="alert">{{ $errors->first('guardian_education') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.familyInfo.fields.guardian_education_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('guardian_education') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.familyInfo.fields.guardian_education_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
 
                                 <div class="col-md-6 {{ $errors->has('guardian_land') ? 'has-error' : '' }}">
                                     <label class="required" for="guardian_land">{{ trans('cruds.familyInfo.fields.guardian_land') }} [শতাংশ]</label>
-                                    <input class="form-control" type="number" name="guardian_land" id="guardian_land" value="{{ old('guardian_land', '') }}" placeholder="অভিভাবকের জমির পরিমাণ" step="0.01" max="10.10" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 " onKeyDown="if (this.value.length==5 && event.keyCode!=8) return false" required>
+                                    <input class="form-control" type="text" name="guardian_land" id="guardian_land" value="{{ old('guardian_land', '') }}" placeholder="অভিভাবকের জমির পরিমাণ" step="0.01" max="10.10"
+                                     onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 " onKeyDown="if (this.value.length==5 && event.keyCode!=8) return false" required>
                                     @if($errors->has('guardian_land'))
-                                    <span class="help-block" role="alert">{{ $errors->first('guardian_land') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.familyInfo.fields.guardian_land_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.write_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('guardian_land') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.familyInfo.fields.guardian_land_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.write_something')}}</div>
                                 </div>
 
 
                                 <div class="col-md-6 {{ $errors->has('guardian_annual_income') ? 'has-error' : '' }}">
                                     <label class="required" for="guardian_annual_income">{{ trans('cruds.familyInfo.fields.guardian_annual_income') }}</label>
-                                    <input class="form-control" type="number" name="guardian_annual_income" id="guardian_annual_income" value="{{ old('guardian_annual_income', '') }}" placeholder="এক বছরে অভিভাবকের আয় কত টাকা " min="1" max="500000" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 " onKeyDown="if (this.value.length==6 && event.keyCode!=8) return false" required>
+                                    <input class="form-control" type="text" name="guardian_annual_income" id="guardian_annual_income" value="{{ old('guardian_annual_income', '') }}" placeholder="এক বছরে অভিভাবকের আয় কত টাকা " min="1" max="500000"
+                                     onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 " onKeyDown="if (this.value.length==6 && event.keyCode!=8) return false" required>
 
                                     @if($errors->has('guardian_annual_income'))
-                                    <span class="help-block" role="alert">{{ $errors->first('guardian_annual_income') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.familyInfo.fields.family_member_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.write_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('guardian_annual_income') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.familyInfo.fields.family_member_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.write_something')}}</div>
                                 </div>
 
                                 <div class="col-md-6 {{ $errors->has('family_member') ? 'has-error' : '' }}">
                                     <label class="required" for="family_member">{{ trans('cruds.familyInfo.fields.family_member') }}</label>
-                                    <input class="form-control" type="number" name="family_member" id="family_member" value="{{ old('family_member', '') }}" placeholder="পরিবারের সদস্য সংখ্যা" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 " onKeyDown="if (this.value.length==2 && event.keyCode!=8) return false" required>
+                                    <input class="form-control" type="text" name="family_member" id="family_member" value="{{ old('family_member', '') }}" placeholder="পরিবারের সদস্য সংখ্যা"
+                                     onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 " onKeyDown="if (this.value.length==2 && event.keyCode!=8) return false" required>
 
                                     @if($errors->has('family_member'))
-                                    <span class="help-block" role="alert">{{ $errors->first('family_member') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.familyInfo.fields.guardian_annual_income_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.write_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('family_member') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.familyInfo.fields.guardian_annual_income_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.write_something')}}</div>
                                 </div>
 
                             </div>
@@ -401,8 +427,10 @@
                         <fieldset class="border">
                             <legend class="border">ভর্তিচ্ছু প্রতিষ্ঠানের তথ্য</legend>
 
-                            @php $inst_district = App\Models\District::where('division_name_id',old('institute_division'))->get(); @endphp
-                            @php $inst_upazila = App\Models\Upazila::where('district_id',old('institute_district'))->get(); @endphp
+                            @php $inst_district = App\Models\District::where('division_name_id',old('institute_division'))->get();
+                            @endphp
+                            @php $inst_upazila = App\Models\Upazila::where('district_id',old('institute_district'))->get();
+                            @endphp
 
                             <div class="form-row">
 
@@ -416,10 +444,10 @@
                                         @endforeach
                                     </select>
                                     @if($errors->has('institute_division'))
-                                    <span class="help-block" role="alert">{{ $errors->first('institute_division') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.institute_division_helper')}}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('institute_division') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.institute_division_helper')}}</span>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
 
                                 <div class="col-md-6 {{ $errors->has('institute_district') ? 'has-error' : '' }}">
@@ -433,10 +461,10 @@
                                         @endif
                                     </select>
                                     @if($errors->has('institute_district'))
-                                    <span class="help-block" role="alert">{{ $errors->first('institute_district') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.institute_district_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('institute_district') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.institute_district_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
 
                                 <div class="col-md-6 {{ $errors->has('institute_upazila') ? 'has-error' : '' }}">
@@ -451,10 +479,10 @@
                                         @endif
                                     </select>
                                     @if($errors->has('institute_upazila'))
-                                    <span class="help-block" role="alert">{{ $errors->first('institute_upazila') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.institute_upazila_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('institute_upazila') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.institute_upazila_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
 
 
@@ -467,10 +495,10 @@
                                         @endforeach
                                     </select>
                                     @if($errors->has('education_level'))
-                                    <span class="help-block" role="alert">{{ $errors->first('education_level') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.education_level_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('education_level') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.education_level_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
 
 
@@ -480,10 +508,10 @@
                                         <option id="nullValueOption" value="">{{ trans('global.pleaseSelect') }}</option>
                                     </select>
                                     @if($errors->has('class_name'))
-                                    <span class="help-block" role="alert">{{ $errors->first('class_name') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.class_name_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('class_name') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.class_name_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
 
 
@@ -493,10 +521,10 @@
                                         <option id="nullValueOption" value='erp' selected='selected'> {{trans('global.pleaseSelect')}}</option>
                                     </select>
                                     @if($errors->has('institute_name'))
-                                    <span class="help-block" role="alert">{{ $errors->first('institute_name') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.institute_name_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('institute_name') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.institute_name_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
 
 
@@ -504,10 +532,10 @@
                                     <label class="required" for="eiin_id">{{ trans('cruds.educationInstituteInfo.fields.eiin') }}</label>
                                     <input class="form-control" type="text" name="eiin_id" id="eiin_id" value="{{ old('eiin', '') }}" required>
                                     @if($errors->has('eiin'))
-                                    <span class="help-block" role="alert">{{ $errors->first('eiin') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.eiin_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.write_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('eiin') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.eiin_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.write_something')}}</div>
                                 </div>
 
 
@@ -518,10 +546,10 @@
 
                                     </select>
                                     @if($errors->has('last_study_class'))
-                                    <span class="help-block" role="alert">{{ $errors->first('last_study_class') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.last_study_class_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('last_study_class') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.last_study_class_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
 
 
@@ -533,20 +561,21 @@
                                         <option value="4.00" {{ old('last_gpa_total') == '4.00' ? 'selected' : '' }}>4.00</option>
                                     </select>
                                     @if($errors->has('last_gpa_total'))
-                                    <span class="help-block" role="alert">{{ $errors->first('last_gpa_total') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.last_gpa_total_helper') }}</span>
-                                    <div class="invalid-feedback">Please select valid GPA</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('last_gpa_total') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.last_gpa_total_helper') }}</span>
+                                        <div class="invalid-feedback">Please select valid GPA</div>
                                 </div>
 
                                 <div class="col-md-6 {{ $errors->has('last_gpa') ? 'has-error' : '' }}">
                                     <label class="required" for="last_gpa">{{ trans('cruds.educationInstituteInfo.fields.last_gpa') }}</label>
-                                    <input class="form-control" type="number" name="last_gpa" id="last_gpa" value="{{ old('last_gpa', '') }}" step="0.01" min="0" oninput='setCustomValidity(last_gpa.value < last_gpa_total.value)' onKeyDown="if (this.value.length==4 && event.keyCode!=8) return false" required>
+                                    <input class="form-control" type="number" name="last_gpa" id="last_gpa" value="{{ old('last_gpa', '') }}" step="0.01" min="0" oninput='setCustomValidity(last_gpa.value < last_gpa_total.value)'
+                                     onKeyDown="if (this.value.length==4 && event.keyCode!=8) return false" required>
                                     @if($errors->has('last_gpa'))
-                                    <span class="help-block" role="alert">{{ $errors->first('last_gpa') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.last_gpa_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.write_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('last_gpa') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.educationInstituteInfo.fields.last_gpa_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.write_something')}}</div>
                                 </div>
 
 
@@ -567,10 +596,10 @@
                                         @endforeach
                                     </select>
                                     @if($errors->has('banking_type'))
-                                    <span class="help-block" role="alert">{{ $errors->first('banking_type') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.accountInfo.fields.banking_type_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('banking_type') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.accountInfo.fields.banking_type_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
 
                                 <div id="bank_account_type" class="col col-md-6 {{ $errors->has('account_type') ? 'has-error' : '' }}">
@@ -582,10 +611,10 @@
                                         @endforeach
                                     </select>
                                     @if($errors->has('account_type'))
-                                    <span class="help-block" role="alert">{{ $errors->first('account_type') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.accountInfo.fields.account_type_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('account_type') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.accountInfo.fields.account_type_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
 
 
@@ -598,10 +627,10 @@
                                         @endforeach
                                     </select>
                                     @if($errors->has('bank_account_owner'))
-                                    <span class="help-block" role="alert">{{ $errors->first('bank_account_owner') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.accountInfo.fields.bank_account_owner_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('bank_account_owner') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.accountInfo.fields.bank_account_owner_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
 
                                 <div class="col col-md-6 {{ $errors->has('bank_name') ? 'has-error' : '' }}">
@@ -614,10 +643,10 @@
 
 
                                     @if($errors->has('bank_name'))
-                                    <span class="help-block" role="alert">{{ $errors->first('bank_name') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.accountInfo.fields.bank_name_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('bank_name') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.accountInfo.fields.bank_name_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
 
                                 <div id="bank_district" class=" col col-md-6{{ $errors->has('district') ? 'has-error' : '' }}">
@@ -629,10 +658,10 @@
                                         @endforeach
                                     </select>
                                     @if($errors->has('district'))
-                                    <span class="help-block" role="alert">{{ $errors->first('district') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.accountInfo.fields.district_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('district') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.accountInfo.fields.district_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
 
                                 <div class="col col-md-6 {{ $errors->has('bank_branch') ? 'has-error' : '' }}">
@@ -642,67 +671,72 @@
 
                                     </select>
                                     @if($errors->has('bank_branch'))
-                                    <span class="help-block" role="alert">{{ $errors->first('bank_branch') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.accountInfo.fields.bank_branch_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.select_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('bank_branch') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.accountInfo.fields.bank_branch_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
 
                                 <div class="col col-md-6 {{ $errors->has('acc_name') ? 'has-error' : '' }}">
                                     <label class="required" for="acc_name">{{ trans('cruds.accountInfo.fields.acc_name') }} [ইংরেজিতে লিখুন]</label>
-                                    <input class="form-control" type="text" name="acc_name" id="acc_name" value="{{ old('acc_name', '') }}" onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) ||(event.charCode >= 97 && event.charCode <= 122) ||  event.charCode == 46 || event.charCode == 32||event.charCode == 0)" onKeyDown="if (this.value.length==50 && event.keyCode!=8 ) return false" required>
+                                    <input class="form-control" type="text" name="acc_name" id="acc_name" value="{{ old('acc_name', '') }}"
+                                     onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) ||(event.charCode >= 97 && event.charCode <= 122) ||  event.charCode == 46 || event.charCode == 32||event.charCode == 0)"
+                                     onKeyDown="if (this.value.length==50 && event.keyCode!=8 ) return false" required>
                                     @if($errors->has('acc_name'))
-                                    <span class="help-block" role="alert">{{ $errors->first('acc_name') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.accountInfo.fields.acc_name_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.write_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('acc_name') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.accountInfo.fields.acc_name_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.write_something')}}</div>
                                 </div>
 
                                 <div class="col col-md-6{{ $errors->has('acc_no') ? 'has-error' : '' }}">
                                     <label class="required" for="acc_no">{{ trans('cruds.accountInfo.fields.acc_no') }}</label>
                                     <!-- <input class="form-control" type="number" name="acc_no" id="acc_no" value="{{ old('acc_no', '') }}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 " onKeyDown="if (this.value.length==11 && event.keyCode!=8) return false" required placeholder="সম্পূর্ণ একাউন্ট নম্বর" required> -->
-                                    <input class="form-control" type="text" name="acc_no" id="acc_no" value="{{ old('acc_no', '') }}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode='০' || event.charCode == 0 " onkeydown="return banglaToEnglish(this.value);" required>
+                                    <input class="form-control" type="text" name="acc_no" id="acc_no" value="{{ old('acc_no', '') }}"
+                                     onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode='০' || event.charCode == 0 " onkeydown="return banglaToEnglish(this.value);" required>
                                     @if($errors->has('acc_no'))
-                                    <span class="help-block" role="alert">{{ $errors->first('acc_no') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.accountInfo.fields.acc_no_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.write_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('acc_no') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.accountInfo.fields.acc_no_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.write_something')}}</div>
                                 </div>
 
                                 <div class="col col-md-6 {{ $errors->has('account_holder_nid') ? 'has-error' : '' }}">
                                     <label for="account_holder_nid">{{ trans('cruds.accountInfo.fields.account_holder_nid') }}</label>
-                                    <input class="form-control" type="number" name="account_holder_nid" id="account_holder_nid" value="{{ old('account_holder_nid', '') }}" step="1" minlength="10" maxlength="17" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 " onKeyDown="if (this.value.length==17 && event.keyCode!=8) return false" required placeholder="১০ অথবা ১৭ ডিজিটের জাতীয় পরিচয়পত্র নম্বর" required>
+                                    <input class="form-control" type="number" name="account_holder_nid" id="account_holder_nid" value="{{ old('account_holder_nid', '') }}" step="1" minlength="10" maxlength="17"
+                                     onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 " onKeyDown="if (this.value.length==17 && event.keyCode!=8) return false" required
+                                     placeholder="১০ অথবা ১৭ ডিজিটের জাতীয় পরিচয়পত্র নম্বর" required>
                                     @if($errors->has('account_holder_nid'))
-                                    <span class="help-block" role="alert">{{ $errors->first('account_holder_nid') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.accountInfo.fields.account_holder_nid_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.write_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('account_holder_nid') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.accountInfo.fields.account_holder_nid_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.write_something')}}</div>
                                 </div>
 
                                 <div id="routing_no" class="col col-md-6 {{ $errors->has('routing_no') ? 'has-error' : '' }}">
                                     <label class="required" for="routing_no_id">{{ trans('cruds.accountInfo.fields.routing_no') }}</label>
                                     <input class="form-control" type="number" name="routing_no_id" id="routing_no_id" value="{{ old('routing_no_id', '') }}" step="1" readonly="1" required>
                                     @if($errors->has('routing_no'))
-                                    <span class="help-block" role="alert">{{ $errors->first('routing_no') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.accountInfo.fields.routing_no_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.write_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('routing_no') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.accountInfo.fields.routing_no_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.write_something')}}</div>
                                 </div>
 
                                 <div class=" col col-md-6{{ $errors->has('eiin') ? 'has-error' : '' }}" hidden>
                                     <label class="required" for="eiin">{{ trans('cruds.accountInfo.fields.eiin') }}</label>
                                     <input class="form-control" type="text" name="eiin" id="eiin_account" value="{{ old('eiin', '') }}" required>
                                     @if($errors->has('eiin'))
-                                    <span class="help-block" role="alert">{{ $errors->first('eiin') }}</span>
-                                    @endif
-                                    <span class="help-block">{{ trans('cruds.accountInfo.fields.eiin_helper') }}</span>
-                                    <div class="invalid-feedback">{{trans('global.write_something')}}</div>
+                                        <span class="help-block" role="alert">{{ $errors->first('eiin') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.accountInfo.fields.eiin_helper') }}</span>
+                                        <div class="invalid-feedback">{{trans('global.write_something')}}</div>
                                 </div>
 
                             </div>
                         </fieldset>
 
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="padding: 0px;">
                             <button class="btn btn-danger pull-right" type="submit">
                                 <i class="fas fa-save">&nbsp; </i>{{ trans('global.save') }}
                             </button>

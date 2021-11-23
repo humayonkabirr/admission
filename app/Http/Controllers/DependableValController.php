@@ -91,7 +91,20 @@ class DependableValController extends Controller
 
         if (is_numeric($id) && $id != '')
 
-            $data = Union::select('union_name', 'id')->where('upazila_id', $request->id)->take(100)->get();
+            $data = Union::select('union_name', 'id')->where('upazila_id', $request->id)->where('is_ward', 0)->take(100)->get();
+        else
+            $data = '';
+
+        return response()->json($data); //then sent this data to ajax success
+    }
+
+    public function findUnionsNameWithOutPor(Request $request)
+    {
+        $id = preg_replace('/[^a-z\d ]/i', '', $request->id);
+
+        if (is_numeric($id) && $id != '')
+
+            $data = Union::select('union_name', 'id')->where('upazila_id', $request->id)->where('is_ward', 1)->take(100)->get();
         else
             $data = '';
 

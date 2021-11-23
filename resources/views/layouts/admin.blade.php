@@ -25,6 +25,10 @@
 
 
     <style>
+        body {
+            background-image: url('{{ asset("assets/gov-bg.png") }}');
+        }
+
         @media(max-width: 768px) {
 
             #companyNameLogo {
