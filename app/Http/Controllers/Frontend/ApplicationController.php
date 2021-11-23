@@ -30,7 +30,6 @@ use App\Models\McuType;
 use Exception;
 use PDF;
 use DB;
-
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
@@ -103,8 +102,6 @@ class ApplicationController extends Controller
         //20 01 1 02 01 001 105691 210806 13 08 33 35
 
         //return $appNo;
-
-        $request->acc_no = BanglaToEnglishConverterTrait::bn2en($request->acc_no);
 
         $generalInfo =  new GeneralInfo([
             'user_id_no' => $user_id_no,

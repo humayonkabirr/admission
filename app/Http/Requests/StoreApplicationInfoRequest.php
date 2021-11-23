@@ -29,7 +29,7 @@ class StoreApplicationInfoRequest extends FormRequest
     public function rules()
     {
         
-        $acc_no = BanglaToEnglishConverterTrait::bn2en($request->acc_no);
+        
 
         return [
 
