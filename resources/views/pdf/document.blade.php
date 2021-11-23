@@ -18,6 +18,8 @@
 
         .container {
             padding: 0px 35px;
+            /* background-color: #668284; */
+
         }
 
         #header {
@@ -71,7 +73,6 @@
             background-color: #C1E3E1;
         }
 
-        h3 {}
 
         #job-responsibilities {
             padding: 1px;
@@ -109,6 +110,23 @@
         #heading {
             font-weight: bold;
         }
+
+        .bg-image {
+            /* The image used */
+            background-image: "localhost/admission/public/images/aams-logo-big.png";
+
+            /* Add the blur effect */
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
+
+            /* Full height */
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
     </style>
 
 
@@ -118,8 +136,6 @@
 <body>
 
     <div class="container">
-
-
 
         <div class="header">
 
@@ -139,6 +155,9 @@
 
 
 
+        </div>
+        <div style="text-align:center; color:black; font-size:20px; font-weight:bolder;  text-decoration:underline;">
+            ভর্তি সহায়তার আবেদন
         </div>
 
 
