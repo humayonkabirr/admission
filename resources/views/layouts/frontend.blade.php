@@ -50,10 +50,28 @@
             background-color: white;
         }
 
-        .logo-lg{
+        .logo-lg {
             margin-right: 30px;
         }
 
+
+        /* table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
+            top: 8px;
+            left: 4px;
+            height: 16px;
+            width: 16px;
+            display: block;
+            position: absolute;
+            color: white;
+            border: 2px solid white;
+            border-radius: 16px;
+            text-align: center;
+            line-height: 14px;
+            box-shadow: 0 0 3px #444;
+            box-sizing: content-box;
+            content: '+';
+            background-color: #31b131;
+        } */
 
         /* End of loading Animation css */
     </style>
@@ -469,21 +487,21 @@
             </div>
             @endif
             @if($errors->count() > 0)
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="alert alert-danger">
-                                <ul class="list-unstyled mb-0">
-                                    @foreach($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                </ul>
-                            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger">
+                            <ul class="list-unstyled mb-0">
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
                 </div>
-                @endif
-                @yield('content')
+            </div>
+            @endif
+            @yield('content')
 
         </main>
 
@@ -513,7 +531,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
-<script src="{{ asset('js/main.js') }}"></script>
+
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"></script>
+
+<!-- 
+<script src="{{ asset('js/main.js') }}"></script> -->
+
+<script>
+    $(document).ready(function() {
+        $('#app_list').DataTable();
+    });
+</script>
+
 
 @yield('scripts')
 
