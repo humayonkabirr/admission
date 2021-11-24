@@ -22,6 +22,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="app_list" rowspan="1" colspan="1" aria-label="Last name: activate to sort column descending" style="width: 139px;" aria-sort="ascending">প্রেরণের সময় ও তারিখ</th>
                             <th class="sorting_asc" tabindex="0" aria-controls="app_list" rowspan="1" colspan="1" aria-label="Last name: activate to sort column descending" style="width: 139px;" aria-sort="ascending">আবেদনের বর্তমান অবস্থা</th>
                             <th class="sorting_asc" tabindex="0" aria-controls="app_list" rowspan="1" colspan="1" aria-label="Last name: activate to sort column descending" style="width: 139px;" aria-sort="ascending">করণীয় কাজ</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="app_list" rowspan="1" colspan="1" aria-label="Last name: activate to sort column descending" style="width: 139px;" aria-sort="ascending">ডাউনলোড</th>
 
                         </tr>
                     </thead>
