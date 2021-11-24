@@ -30,6 +30,7 @@ use App\Models\McuType;
 use Exception;
 use PDF;
 use DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
@@ -363,7 +364,10 @@ class ApplicationController extends Controller
 
     function pdf_html($id)
     {
+        $user_id_no = auth()->user()->id;
 
+     
+        $user = User::where('id', $user_id_no);
         $general_info = GeneralInfo::where('id', $id)->first();
         $family_info = FamilyInfo::where('application_number_id', $general_info->id)->first();
         $educationInstitute_info = EducationInstituteInfo::where('application_number_id', $general_info->id)->first();
@@ -373,6 +377,7 @@ class ApplicationController extends Controller
 
         $data = [
             'foo' => 'bar',
+            'user' => $user,
             'general_info' => $general_info,
             'family_info' => $family_info,
             'educationInstitute_info' => $educationInstitute_info,

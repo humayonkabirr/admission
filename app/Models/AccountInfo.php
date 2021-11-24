@@ -15,12 +15,12 @@ class AccountInfo extends Model
     use HasFactory;
 
     public const BANK_ACCOUNT_OWNER_SELECT = [
-        '1' => 'নিজ(Self)',
-        '2' => 'পিতা (Father)',
-        '3' => 'মাতা (Mother)',
-        '4' => 'ভাই (Bother)',
-        '5' => 'বোন (Sister)',
-        '6' => 'অন্যান্য (Others)',
+        '1' => 'নিজ',
+        '2' => 'পিতা ',
+        '3' => 'মাতা',
+        '4' => 'ভাই',
+        '5' => 'বোন',
+        '6' => 'অন্যান্য',
     ];
 
     public const ACCOUNT_TYPE_SELECT = [

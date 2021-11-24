@@ -1,3 +1,4 @@
+
 <!-- This is for Student Homepage .This Extends Layouts/Main and Partials/Menu -->
 
 @extends('layouts.frontend')
@@ -66,7 +67,7 @@
 
                 <div class="panel-heading">
 
-                    ভর্তি সহায়তার আবেদন ফর্ম
+                    ভর্তি সহায়তার আবেদন 
                 </div>
                 <div class="panel-body">
                     <p class="header-note"> [*] চিহ্নিত ঘরগুলো অবশ্যই পূরণ করতে হবে। সকল তথ্য ইউনিকোড বাংলায় পূরণ করুন। </p>
