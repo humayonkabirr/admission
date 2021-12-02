@@ -26,10 +26,11 @@ use App\Models\User;
 use App\Models\Document;
 use App\Models\Bank_Account_Type;
 use App\Models\AccountOwner;
+use App\Models\McuType;
 use Exception;
 use PDF;
 use DB;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
@@ -62,17 +63,9 @@ class ApplicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreApplicationInfoRequest $request)
     {
-        //  dd($request);
-        // return  $request;
-
-        $validatedData = $request->validate([
-            //'title' => ['required'],
-            //'body' => ['required'],
-        ]);
-
-
+        
         $user_id_no = auth()->user()->id;
 
         $ay = $request->academic_year;
@@ -97,13 +90,11 @@ class ApplicationController extends Controller
         $age = $interval->format("%Y");
 
 
-        // 1= Admissin 2= Medical 
+        // 1= Admissin 2= Medical
         $appNo = $ay . $cirID . $grantsType . $divID . $distID . $upaID . $eiinNO . $todayRand;
         //20 01 1 02 01 001 105691 210806 13 08 33 35
 
         //return $appNo;
-
-        $request->acc_no = BanglaToEnglishConverterTrait::bn2en($request->acc_no);
 
         $generalInfo =  new GeneralInfo([
             'user_id_no' => $user_id_no,
@@ -205,7 +196,7 @@ class ApplicationController extends Controller
         $accountinfo = AccountInfo::where('app_number_id', $general_info->id)->first();
 
         //developing in progress.............
-        return view('frontend.application_document')
+        return view('frontend.application.application_document')
             ->with('general_info', $general_info)
             ->with('family_info', $family_info)
             ->with('educationInstitute_info', $educationInstitute_info)
@@ -342,7 +333,7 @@ class ApplicationController extends Controller
         $app_tracking->update();
 
 
-        return view('frontend.application_success', $data);
+        return view('frontend.application.application_success', $data);
     }
 
     function pdf($id)
@@ -358,13 +349,17 @@ class ApplicationController extends Controller
 
         $pdf->WriteHTML($this->pdf_html($id));
 
-        $pdf->Output("uploads/applicants_copy/".$file_name, 'F');
+
+        $pdf->Output("uploads/applicants_copy/" . $file_name, 'F');
         $pdf->Output($file_name, 'D');
     }
 
     function pdf_html($id)
     {
+        $user_id_no = auth()->user()->id;
 
+     
+        $user = User::where('id', $user_id_no);
         $general_info = GeneralInfo::where('id', $id)->first();
         $family_info = FamilyInfo::where('application_number_id', $general_info->id)->first();
         $educationInstitute_info = EducationInstituteInfo::where('application_number_id', $general_info->id)->first();
@@ -374,6 +369,7 @@ class ApplicationController extends Controller
 
         $data = [
             'foo' => 'bar',
+            'user' => $user,
             'general_info' => $general_info,
             'family_info' => $family_info,
             'educationInstitute_info' => $educationInstitute_info,
@@ -461,6 +457,7 @@ class ApplicationController extends Controller
 
             $divisions = Division::all();
             $districts = District::all();
+            $mcu_types = McuType::all();
 
             $education_levels = AcademicLevel::all();
 
@@ -502,7 +499,7 @@ class ApplicationController extends Controller
                         $accountinfo = AccountInfo::where('app_number_id', $general_info->id)->first();
 
                         //developing in progress.............
-                        return view('frontend.application_document')
+                        return view('frontend.application.application_document')
                             ->with('general_info', $general_info)
                             ->with('family_info', $family_info)
                             ->with('educationInstitute_info', $educationInstitute_info)
@@ -510,7 +507,7 @@ class ApplicationController extends Controller
                             ->with('user_id', $user_id_no)
                             ->with('message', 'Application Submitted Successfully');
                     } else {
-                        return view('frontend.application', compact(
+                        return view('frontend.application.application', compact(
                             'circulars',
                             'divisions',
                             'user_id_no',
@@ -522,6 +519,7 @@ class ApplicationController extends Controller
                             'bank_names',
                             'banking_types',
                             'districts',
+                            'mcu_types',
                             'circular_type',
                             'userData',
                             'bank_account_types'
@@ -547,7 +545,7 @@ class ApplicationController extends Controller
         $accountinfo = AccountInfo::where('app_number_id', $general_info->id)->first();
 
         //developing in progress.............
-        return view('frontend.application_document')
+        return view('frontend.application.application_document')
             ->with('general_info', $general_info)
             ->with('family_info', $family_info)
             ->with('educationInstitute_info', $educationInstitute_info)
@@ -687,7 +685,7 @@ class ApplicationController extends Controller
         $user_id_no = auth()->user()->id;
 
         //developing in progress.............
-        return view('frontend.application_document')
+        return view('frontend.application.application_document')
             ->with('general_info', $general_info)
             ->with('family_info', $family_info)
             ->with('educationInstitute_info', $educationInstitute_info)

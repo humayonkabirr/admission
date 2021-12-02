@@ -21,18 +21,18 @@
                     <input id="email" type="email" class="form-control" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus placeholder="{{ trans('global.login_email') }}">
 
                     @if($errors->has('email'))
-                        <span class="help-block" role="alert">
-                            {{ $errors->first('email') }}
-                        </span>
+                    <span class="help-block" role="alert">
+                        {{ $errors->first('email') }}
+                    </span>
                     @endif
                 </div>
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                     <input id="password" type="password" class="form-control" name="password" required placeholder="{{ trans('global.login_password') }}">
 
                     @if($errors->has('password'))
-                        <span class="help-block" role="alert">
-                            {{ $errors->first('password') }}
-                        </span>
+                    <span class="help-block" role="alert">
+                        {{ $errors->first('password') }}
+                    </span>
                     @endif
                 </div>
                 <div class="form-group">

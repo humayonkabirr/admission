@@ -4,8 +4,16 @@
 <head>
     <style>
         body {
-            font-size: 14px;
+            font-size: 18px;
 
+
+        }
+
+
+        .watermark {
+            content: "PMEAT";
+
+            background-size: 100%;
         }
 
         hr {
@@ -17,7 +25,9 @@
         }
 
         .container {
-            padding: 0px 35px;
+            padding: 0px 1px;
+            /* background-color: #668284; */
+
         }
 
         #header {
@@ -71,7 +81,6 @@
             background-color: #C1E3E1;
         }
 
-        h3 {}
 
         #job-responsibilities {
             padding: 1px;
@@ -119,18 +128,15 @@
 
     <div class="container">
 
-
-
         <div class="header">
 
             <table>
                 <tr>
                     <td style="width: 50%">
-                        
-                        <img src="{{url('/public/images/aams-logo-big.png')}}" alt="Image" height="50px"/>
+                        <img src="{{ url('/public/images/aams-logo-big.png') }}" alt="Image" height="50px" />
                     </td>
                     <td>
-                        <span style="float: right">
+                        <span style="float: right ; align:right;">
                             আবেদন নম্বর: {{ $general_info->application_no }}
                         </span>
                     </td>
@@ -141,37 +147,46 @@
 
 
         </div>
-
-
+        <div style="text-align:center; color:black; font-size:20px; font-weight:bolder;  text-decoration:underline;">
+            ভর্তি সহায়তার আবেদন
+        </div>
         <div class="right">
-
             <h3>সাধারণ তথ্য</h3>
             <hr>
 
             <table style="margin: 12px 0px">
-               <tr>
+
+
+
+                <tr>
                     <td style="width: 25%;">
-                        <img src="{{ asset('uploads/profile/'.$document->profile) }}" width="120px" height="120px">
+                        <img src="{{ asset('uploads/profile/' . $document->profile) }}" width="120px" height="120px"> <br>
+                        <span style="position:absolute;  float: right; font-size:8px; ">আবেদনের তারিখঃ {{ $general_info->created_at }}</span>
                     </td>
                     <td>
-
                         <p>
                         <ul>
-                            <li>নাম: {{ $general_info->name }}</li>
+                            <li>শিক্ষার্থীর নাম: {{ $general_info->name }}</li>
                             <li>জন্ম নিবন্ধন নম্বর: {{ $general_info->brid }}</li>
                             <li>জাতীয় পরিচয়পত্র নম্বর: {{ $general_info->nid }}</li>
+                            <li>জন্ম তারিখ: {{ $general_info->dob }}, বয়স: 0{{ $general_info->age }} বছর</li>
                             <li>পিতার নাম: {{ $general_info->father_name }}</li>
                             <li>মাতার নাম: {{ $general_info->mother_name }}</li>
-                            <li>জন্ম তারিখ: {{ $general_info->dob }}</li>
+                            @if (!empty($general_info->mother_name))<li>মাতার এনআইডি: {{ $general_info->mother_nid }}</li> @endif
+                            @if (!empty($general_info->father_nid))<li>পিতার এনআইডি: {{ $general_info->father_nid }}</li> @endif
+
+
                         </ul>
                         </p>
                     </td>
 
                     <td>
-
-
                         <p>
                         <ul>
+                            <li>লিঙ্গ: {{ $general_info->gender }}</li>
+
+
+                            <U>বর্তমান ঠিকানা</U>
                             <li>বিভাগ: {{ $general_info->division->division_name }}</li>
                             <li>জেলা: {{ $general_info->district->district_name }}</li>
                             <li>উপজেলা: {{ $general_info->upazila->upazila_name }}</li>
@@ -184,100 +199,88 @@
 
             </table>
 
+            <div class="watermark">
+
+                <h3>অভিভাবকের আর্থসামাজিক অবস্থা</h3>
+                <hr>
+
+                <table>
+
+                    <tr>
+                        <td style="width: 60%">
+                            <ul>
+                                <li>কোটা: {{ $family_info->familystatus->status_name }}</li>
+                                <li>অভিভাবকের পেশা: {{ $family_info->guardian_occupation->occupation_name }}</li>
+                                <li>অভিভাবকের জমির পরিমাণ: {{ $family_info->guardian_land }}শতাংশ </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>অভিভাবকের শিক্ষাগত যোগ্যতা: {{ $family_info->guardian_education }}</li>
+                                <li>অভিভাবকের বার্ষিক আয়: {{ $family_info->guardian_annual_income }} টাকা</li>
+                                <li>পরিবারের সদস্য সংখ্যা: {{ $family_info->family_member }}জন</li>
+                            </ul>
+                        </td>
+
+                    </tr>
 
 
-            <h3>অভিভাবকের আর্থসামাজিক অবস্থা</h3>
-            <hr>
-
-            <table>
-                <tr>
-                    
-                    <td width="35%">কোটা</td width="35%">
-                    <td>{{ $family_info->familystatus->status_name }}</td>
-                </tr>
-                <tr>
-                    <td width="35%">অভিভাবকের পেশা</td>
-                    <td>{{ $family_info->guardian_occupation->occupation_name }}</td>
-                </tr>
-                <tr>
-                    <td width="35%">অভিভাবকের শিক্ষাগত যোগ্যতা</td>
-                    <td>{{ $family_info->guardian_education }}</td>
-                </tr>
-                <tr>
-                    <td width="35%">অভিভাবকের জমির পরিমাণ</td>
-                    <td>{{ $family_info->guardian_land }} শতাংশ </td>
-                </tr>
-                <tr>
-                    <td width="35%">অভিভাবকের বার্ষিক আয়</td>
-                    <td>{{ $family_info->guardian_annual_income }} টাকা</td>
-                </tr>
-                <tr>
-                    <td width="35%">পরিবারের সদস্য সংখ্যা</td>
-                    <td>{{ $family_info->family_member }} জন </td>
-                </tr>
-
-            </table>
+                </table>
 
 
-            <h3>ভর্তিচ্ছু প্রতিষ্ঠানের তথ্য</h3>
-            <hr>
+                <h3>ভর্তিচ্ছু প্রতিষ্ঠানের তথ্য</h3>
+                <hr>
 
-            <table>
-                <tr>
-                    <td width="35%">ভর্তিচ্ছুক প্রতিষ্ঠানের বিভাগ</td>
-                    <td>{{ $educationInstitute_info->division->division_name }}</td>
-                </tr>
-                <tr>
-                    <td width="35%">ভর্তিচ্ছুক প্রতিষ্ঠানের জেলা</td>
-                    <td>{{ $educationInstitute_info->district->district_name }}</td>
-                </tr>
-                <tr>
-                    <td width="35%">ভর্তিচ্ছুক প্রতিষ্ঠানের উপজেলা</td>
-                    <td>{{ $educationInstitute_info->upazila->upazila_name }}</td>
-                </tr>
-                <tr>
-                    <td width="35%">শিক্ষাস্তর</td>
-                    <td>{{ $educationInstitute_info->education_level->level_name }}</td>
-                </tr>
-                <tr>
-                    <td>ভর্তিচ্ছুক শ্রেণি</td>
-                    <td>{{ $educationInstitute_info->class_name->class_name }}</td>
-                </tr>
-                <tr>
-                    <td>ভর্তি ইচ্ছুক প্রতিষ্ঠানের নাম</td>
-                    <td>{{ $educationInstitute_info->institute_name->institution_name }}</td>
-                </tr>
-                <tr>
-                    <td width="35%">ইআইআইএন নম্বর</td>
-                    <td>{{ $educationInstitute_info->institute_name->institution_eiin_no }}</td>
-                </tr>
-                <tr>
-                    <td width="35%">সর্বশেষ পঠিত শ্রেণি</td>
-                    <td>{{ $educationInstitute_info->last_study_class->class_name }}</td>
-                </tr>
-                <tr>
-                    <td width="35%">সর্বমোট সর্বশেষ জিপিএ</td>
-                    <td>{{ number_format($educationInstitute_info->last_gpa_total,2) }}</td>
-                </tr>
-                <tr>
-                    <td width="35%">সর্বশেষ প্রাপ্ত জিপিএ</td>
-                    <td>{{ number_format($educationInstitute_info->last_gpa,2) }}</td>
-                </tr>
-            </table>
+                <table>
 
+                    <tr>
+                        <td style="width: 60%">
+                            <ul>
+                                <li>ভর্তিচ্ছুক প্রতিষ্ঠানের বিভাগ:
+                                    {{ $educationInstitute_info->division->division_name }}
+                                </li>
+                                <li>ভর্তিচ্ছুক প্রতিষ্ঠানের জেলা:
+                                    {{ $educationInstitute_info->district->district_name }}
+                                </li>
+                                <li>ভর্তিচ্ছুক প্রতিষ্ঠানের উপজেলা:
+                                    {{ $educationInstitute_info->upazila->upazila_name }}
+                                </li>
+                                <li>ভর্তি ইচ্ছুক প্রতিষ্ঠানের নাম:
+                                    {{ $educationInstitute_info->institute_name->institution_name }}
+                                    ({{ $educationInstitute_info->institute_name->institution_eiin_no }})
+                                </li>
+                            </ul>
+
+                        </td>
+                        <td>
+                            <ul>
+                                <li>শিক্ষাস্তর: {{ $educationInstitute_info->education_level->level_name }}</li>
+                                <li>ভর্তিচ্ছুক শ্রেণি: {{ $educationInstitute_info->class_name->class_name }}</li>
+                                <li>সর্বশেষ পঠিত শ্রেণি: {{ $educationInstitute_info->last_study_class->class_name }}
+                                </li>
+                                <li>সর্বমোট সর্বশেষ জিপিএ:
+                                    {{ number_format($educationInstitute_info->last_gpa, 2) }}/{{ number_format($educationInstitute_info->last_gpa_total, 2) }}
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
             <h3>শিক্ষার্থী/অভিভাবকের ব্যাংক একাউন্টের তথ্য</h3>
             <hr>
 
             <table>
-                @if(!empty($accountinfo->bank_account_type->account_type))
+                @if (!empty($accountinfo->banking_type->banking_type_id))
                 <tr>
-                    <td width="35%">হিসাবের ধরণ</td>
-                    <td>{{ $accountinfo->bank_account_type->account_type }}</td>
+                    <td width="35%">ব্যাংকিং ধরণ</td>
+                    <td>{{ $accountinfo->banking_type->banking_type_id }}</td>
                 </tr>
                 @endif
 
                 <tr>
-                    <td width="35%">একাউন্টটি কার?</td>
+                    <td width="35%">হিসাবধারীর সাথে সম্পর্ক </td>
                     <td>{{ $accountinfo->account_owner->owner }}</td>
                 </tr>
                 <tr>
@@ -285,15 +288,16 @@
                     <td>{{ $accountinfo->bank_name->name }}</td>
                 </tr>
 
-                @if(!empty($accountinfo->district->district_name))
+                @if (!empty($accountinfo->district->district_name))
                 <tr>
                     <td width="35%">জেলা</td>
-                    <td>{{ !empty($accountinfo->district->district_name) ? $accountinfo->district->district_name : '' }}</td>
+                    <td>{{ !empty($accountinfo->district->district_name) ? $accountinfo->district->district_name : '' }}
+                    </td>
                 </tr>
                 @endif
 
 
-                @if(!empty($accountinfo->bank_branch->branch_name))
+                @if (!empty($accountinfo->bank_branch->branch_name))
                 <tr>
                     <td width="35%">ব্যাংকের শাখা</td>
                     <td>{{ $accountinfo->bank_branch->branch_name }}</td>
@@ -317,10 +321,7 @@
                     <td width="35%">রাউটিং নম্বর</td>
                     <td>{{ $accountinfo->routing_no }}</td>
                 </tr>
-                <tr>
-                    <td width="35%">ইআইআইএন</td>
-                    <td>{{ $accountinfo->eiin }}</td>
-                </tr>
+
             </table>
 
             <table>
@@ -329,17 +330,18 @@
                         <h3> আবেদনকারীর স্বাক্ষর: </h3>
                     </td>
                     <td>
-                        <img src="{{ asset('uploads/sign/'.$document->signature) }}" height="80px" width="220px" alt="Signature" />
+                        <img src="{{ asset('uploads/sign/' . $document->signature) }}" height="80px" width="220px" alt="Signature" />
                     </td>
                 </tr>
             </table>
-
-
-
-
         </div>
-
     </div>
+
+
+    <footer style="font-size:5px">
+        প্রিন্টের তারিখঃ {{ date('Y-m-d H:i:s') }}
+
+    </footer>
 
 </body>
 

@@ -23,6 +23,7 @@
         body {
             font-family: nikosh !important;
             font-size: 18px;
+            background-image: url('{{ asset("uploads/bg_main.jpg") }}');
         }
 
         .login-page {
@@ -33,7 +34,7 @@
         }
 
 
-        @keyframes color-change {
+        @keyframescolor-change {
 
             0% {
                 background-color: #C2F1EF;
