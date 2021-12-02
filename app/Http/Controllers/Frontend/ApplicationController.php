@@ -65,15 +65,7 @@ class ApplicationController extends Controller
      */
     public function store(StoreApplicationInfoRequest $request)
     {
-        //  dd($request);
-        // return  $request;
-
-        $validatedData = $request->validate([
-            //'title' => ['required'],
-            //'body' => ['required'],
-        ]);
-
-
+        
         $user_id_no = auth()->user()->id;
 
         $ay = $request->academic_year;
