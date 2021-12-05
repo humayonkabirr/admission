@@ -65,7 +65,7 @@ class ApplicationController extends Controller
      */
     public function store(StoreApplicationInfoRequest $request)
     {
-        
+
         $user_id_no = auth()->user()->id;
 
         $ay = $request->academic_year;
@@ -234,9 +234,9 @@ class ApplicationController extends Controller
 
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
-
-            Image::make($file)->resize(600, 600)
-                ->save('uploads/profile/' . $filename, 100);
+            Image::make($file)->resize(600, 600, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save('uploads/profile/' . $filename, 100);
 
             $item->profile = $filename;
         }
@@ -358,7 +358,7 @@ class ApplicationController extends Controller
     {
         $user_id_no = auth()->user()->id;
 
-     
+
         $user = User::where('id', $user_id_no);
         $general_info = GeneralInfo::where('id', $id)->first();
         $family_info = FamilyInfo::where('application_number_id', $general_info->id)->first();

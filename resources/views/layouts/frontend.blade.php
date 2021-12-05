@@ -103,7 +103,7 @@
                     @endguest
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('frontend.application.applynow')}}">
+                        <a class="nav-link" id="applyLink" href="{{route('frontend.application.applynow')}}">
                             আবেদন করুন
                         </a>
                     </li>
@@ -538,12 +538,32 @@
 
 <!-- 
 <script src="{{ asset('js/main.js') }}"></script> -->
+<script src="  https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+@include('sweetalert::alert')
 
 <script>
     $(document).ready(function() {
         $('#app_list').DataTable();
+
+        $('#applyLink').click(function() {
+            // swal({
+            //     title: "Welcome in Alerts",
+            //     text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+            // });
+
+
+            confirm("heelo");
+
+
+
+        });
+
+
     });
 </script>
+
 
 
 @yield('scripts')

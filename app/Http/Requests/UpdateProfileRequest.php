@@ -31,6 +31,10 @@ class UpdateProfileRequest extends FormRequest
         return [
             'name'  => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . auth()->id()],
+            'brid' => ['required',],
+            'user_contact' => ['required',],
+            'photo' => ['required',],
+            'sign' => ['required',],
         ];
     }
 }

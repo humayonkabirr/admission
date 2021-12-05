@@ -10,7 +10,7 @@ $(document).on("change", "#division_id", function() {
 $(document).on("change", "#mcu_type", function() {
 	let mcu_type_id = $(this).val(); //1
 	let district_id = $('#district_id').val();
-	// alert(district_id);
+	//alert(district_id);
 	if (mcu_type_id == "") {
 		mcu_type_id = 0;
 		$("#city_name").find("*").not("#nullValueOption").remove();

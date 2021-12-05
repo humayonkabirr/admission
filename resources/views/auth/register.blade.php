@@ -235,7 +235,9 @@
                                             <option id="nullValueOption" value='' selected='selected'>
                                                 {{ trans('global.pleaseSelect') }}
                                             </option>
-
+                                            @foreach ($mcu_type as $mcu_type)
+                                            <option value="{{ $mcu_type->id }}">{{ $mcu_type->name }}</option>
+                                            @endforeach
                                         </select>
                                         @if ($errors->has('mcu_type'))
                                         <span class="help-block" role="alert">{{ $errors->first('mcu_type') }}</span>
@@ -506,22 +508,6 @@
                                         @endif
                                         <span class="help-block">{{ trans('cruds.generalInfo.fields.district_helper') }}</span>
                                     </div>
-
-
-                                    <div class="col-md-6 {{ $errors->has('division') ? 'has-error' : '' }}">
-                                        <label class="required" for="O_mcu_type">পৌরসভা/কর্পোরেশন/উপজেলা নির্বাচন করুন</label>
-                                        <select class="form-control select2" name="O_mcu_type" id="O_mcu_type" required>
-                                            <option id="nullValueOption" value='' selected='selected'>
-                                                {{ trans('global.pleaseSelect') }}
-                                            </option>
-
-                                        </select>
-                                        @if ($errors->has('division'))
-                                        <span class="help-block" role="alert">{{ $errors->first('division') }}</span>
-                                        @endif
-                                        <span class="help-block">{{ trans('cruds.generalInfo.fields.division_helper') }}</span>
-                                    </div>
-
 
                                     <div class="col-md-6 {{ $errors->has('upazila') ? 'has-error' : '' }}">
                                         <label class="required" for="upazila_id">{{ trans('cruds.generalInfo.fields.upazila') }}</label>
