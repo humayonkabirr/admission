@@ -65,6 +65,14 @@ class ApplicationController extends Controller
      */
     public function store(StoreApplicationInfoRequest $request)
     {
+         // dd($request->all());
+        // return  $request;
+
+        $validatedData = $request->validate([
+            //'title' => ['required'],
+            //'body' => ['required'],
+        ]);
+
 
         $user_id_no = auth()->user()->id;
 
@@ -111,8 +119,8 @@ class ApplicationController extends Controller
             'age' => $age,
             'village' => $request->village_id,
             'circular_id' => $request->circular_id,
-            'division_id' => $request->division_id,
-            'district_id' => $request->districts_id,
+            'division_id' => $request->a_division_id,
+            'district_id' => $request->a_district_id,
             'upazila_id' => $request->upazila_id,
             'union_id' => $request->union_id,
 
@@ -234,9 +242,9 @@ class ApplicationController extends Controller
 
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
-            Image::make($file)->resize(600, 600, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save('uploads/profile/' . $filename, 100);
+
+            Image::make($file)->resize(600, 600)
+                ->save('uploads/profile/' . $filename, 100);
 
             $item->profile = $filename;
         }
@@ -482,7 +490,7 @@ class ApplicationController extends Controller
                 // echo 'No generalInfoDataCheck ';
             }
             if (!empty($generalInfoDataCheck)) {
-                echo 'Already Appliaction Data Exists';
+                return view('message.applicationExpired');
             } else {
                 // dd($daysDiff);
                 //return view('student.application')->with('circulars', $circularData);
@@ -490,7 +498,7 @@ class ApplicationController extends Controller
                     $appNo = ApplicationTracking::where('user_id_no_id', auth()->user()->id)->where('cirID', $circulars[0]->id)->first();
 
                     if ($appNo && $appNo->is_submitted == 1) {
-                        echo 'Already Appliaction Data Exists';
+                        return view('message.applicationExpired');
                     } elseif ($appNo && $appNo->is_completed == 1) {
                         $general_info = GeneralInfo::where('application_no', $appNo->application_no)->first();
 

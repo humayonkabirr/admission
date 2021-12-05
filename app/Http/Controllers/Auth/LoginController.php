@@ -50,13 +50,13 @@ class LoginController extends Controller
     public function username()
     {
         $loginType = request()->input('email');
-
+         
 
         $this->username = filter_var($loginType, FILTER_VALIDATE_EMAIL) ? 'email' : 'brid';
 
         request()->merge([$this->username => $loginType]);
 
-
+         
 
         return property_exists($this, 'username') ? $this->username : 'email';
     }

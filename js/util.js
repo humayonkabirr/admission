@@ -1,12 +1,3 @@
-$("#acc_no").on("input", function () {
-    let inputVal = $(this).val();
-    const toEn = (n) => n.replace(/[০-৯]/g, (d) => "০১২৩৪৫৬৭৮৯".indexOf(d));
-    let result = toEn(inputVal);
-
-    $("#acc_no").val(result);
-    console.log(result);
-});
-
 // Write on First Field name/UserID/AppID it will automatically fill Same information
 $("#stu_name").on("input", function () {
     let result = $(this).val();
@@ -53,6 +44,8 @@ $("#age").on("focus", function () {
     //console.log("Data2= " + data2);
     document.getElementById("age").setAttribute("value", age);
 });
+
+
 
 $("#bank_account_owner").on("change", function () {
     let bank_account_owner = $(this).val();

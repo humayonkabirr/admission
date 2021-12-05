@@ -107,10 +107,6 @@ class RegisterController extends Controller
         }
     }
 
-    public function sendResetCode()
-    {
-    }
-
     public function reloadCaptcha()
     {
         return response()->json(['captcha' => captcha_img()]);
