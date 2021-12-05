@@ -176,13 +176,34 @@
                                         <span class="help-block"> </span>
                                     </div>
 
-                                    <div class="col-md-6 {{ $errors->has('dob') ? ' has-error' : '' }}">
+                                    <div class="col-md-3 {{ $errors->has('dob') ? ' has-error' : '' }}">
                                         <label class="required" for="dob">{{ trans('global.dob') }}</label>
                                         <input class="form-control" type="date" name="dob" id="dob" value="{{ old('dob') }}" min='1899-01-01' max='2000-13-13' data-date="" data-date-format="DD MMMM YYYY" required>
                                         @if ($errors->has('dob'))
                                         <span class="help-block" role="alert">{{ $errors->first('dob') }}</span>
                                         @endif
                                         <span class="help-block"> </span>
+                                    </div>
+                                    <div class="col-md-3 {{ $errors->has('gender') ? 'has-error' : '' }}">
+                                        <label class="required" for="gender">{{ trans('cruds.generalInfo.fields.gender') }}</label>
+                                        <select class="form-control select2" name="gender" id="gender" required>
+                                            <option id="nullValueOption" value=''> {{ trans('global.pleaseSelect') }}</option>
+                                            <option id="nullValueOption" value='Male'> পুরুষ </option>
+                                            <option id="nullValueOption" value='Female'> মহিলা </option>
+                                            <option id="nullValueOption" value='others'> অন্যান্য </option>
+                                            {{-- @if (old('gender'))
+                                            <option value='{{ $data->id }}' {{ $data->id == old('gender') ? 'selected' : '' }}>
+                                                {{ $data->gender }}
+                                            </option>
+
+                                            @endif --}}
+
+
+                                        </select>
+                                        @if ($errors->has('district'))
+                                        <span class="help-block" role="alert">{{ $errors->first('district') }}</span>
+                                        @endif
+                                        <span class="help-block">{{ trans('cruds.generalInfo.fields.district_helper') }}</span>
                                     </div>
 
 

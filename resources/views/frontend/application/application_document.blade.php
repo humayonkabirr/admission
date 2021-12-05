@@ -72,15 +72,16 @@
             </div>
             @endif
 
-            <div class="panel panel-default" style=" 
-                color:green;">
+            <div class="panel panel-default" style="
+                    color:green;">
 
                 <div class="panel-heading">
                     Essential Document
                 </div>
 
                 <div class="panel-body">
-                    <p class="header-note"> [*] চিহ্নিত ঘরগুলো অবশ্যই পূরণ করতে হবে। সকল তথ্য ইউনিকোড বাংলায় পূরণ করুন। </p>
+                    <p class="header-note"> [*] চিহ্নিত ঘরগুলো অবশ্যই পূরণ করতে হবে। সকল তথ্য ইউনিকোড বাংলায় পূরণ
+                        করুন। </p>
                     <form method="POST" action="{{ url('application/document') }}" enctype="multipart/form-data">
                         @csrf
                         <fieldset class="border row">
@@ -241,12 +242,12 @@
                                 </div>
                                 <div class="col-md-6 {{ $errors->has('last_gpa_total') ? 'has-error' : '' }}">
                                     <label class="" for="last_gpa_total">{{ trans('cruds.educationInstituteInfo.fields.last_gpa_total') }}</label>
-                                    <input type="text" class="form-control" value="{{ number_format($educationInstitute_info->last_gpa_total,2) }}" disabled>
+                                    <input type="text" class="form-control" value="{{ number_format($educationInstitute_info->last_gpa_total, 2) }}" disabled>
                                 </div>
 
                                 <div class="col-md-6 {{ $errors->has('last_gpa') ? 'has-error' : '' }}">
                                     <label class="" for="last_gpa">{{ trans('cruds.educationInstituteInfo.fields.last_gpa') }}</label>
-                                    <input type="number" class="form-control" value="{{ number_format($educationInstitute_info->last_gpa,2) }}" disabled>
+                                    <input type="number" class="form-control" value="{{ number_format($educationInstitute_info->last_gpa, 2) }}" disabled>
                                 </div>
 
 
@@ -259,13 +260,12 @@
                             </legend>
                             <div class="form-row">
 
-                                @if(!empty($accountinfo->bank_account_type->account_type))
+                                @if (!empty($accountinfo->bank_account_type->account_type))
                                 <div class="col col-md-6 {{ $errors->has('account_type') ? 'has-error' : '' }}">
                                     <label>{{ trans('cruds.accountInfo.fields.account_type') }}</label>
                                     <input type="text" class="form-control" value="{{ $accountinfo->bank_account_type->account_type }}" disabled>
                                 </div>
                                 @endif
-
 
                                 <div class="col col-md-6 {{ $errors->has('bank_account_owner') ? 'has-error' : '' }}">
                                     <label class="">{{ trans('cruds.accountInfo.fields.bank_account_owner') }}</label>
@@ -277,14 +277,14 @@
                                     <input type="text" class="form-control" value="{{ $accountinfo->bank_name->name }}" disabled>
                                 </div>
 
-                                @if(!empty($accountinfo->district->district_name))
+                                @if (!empty($accountinfo->district->district_name))
                                 <div class=" col col-md-6{{ $errors->has('district') ? 'has-error' : '' }}">
                                     <label for="district_id">{{ trans('cruds.accountInfo.fields.district') }}</label>
                                     <input type="text" class="form-control" name="district_id" value="{{ !empty($accountinfo->district->district_name) ? $accountinfo->district->district_name : '' }}" disabled>
                                 </div>
                                 @endif
 
-                                @if(!empty($accountinfo->bank_branch->branch_name))
+                                @if (!empty($accountinfo->bank_branch->branch_name))
                                 <div class="col col-md-6 {{ $errors->has('bank_branch') ? 'has-error' : '' }}">
                                     <label for="bank_branch_id">{{ trans('cruds.accountInfo.fields.bank_branch') }}</label>
                                     <input type="text" class="form-control" value="{{ $accountinfo->bank_branch->branch_name }}" disabled>
@@ -326,8 +326,8 @@
                                 প্রয়োজনীয় কাগজপত্রের ছবি/ স্ক্যানকপি
                             </legend>
 
-                            @if(count($errors) > 0)
-                            @foreach($errors->all() as $error)
+                            @if (count($errors) > 0)
+                            @foreach ($errors->all() as $error)
                             <div class="alert alert-danger">{{ $error }}</div>
                             @endforeach
                             @endif
@@ -339,7 +339,7 @@
                                 <label class="form-check-label" for="profile">ছবি আপলোড করুন</label>
                                 <br><img id="blah1" onchange="validateMultipleImage('blah1')" alt="image" src="" height="180px" width="180px" onerror="this.onerror=null;this.src='https://www.jamiemaison.com/creating-a-simple-text-editor/placeholder.png';" required />
                                 <br><input type="file" class="mt-2" name="profile" onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0]); show(this)" accept=".jfif,.jpg,.jpeg,.png,.gif" required>
-                                @if($errors->has('profile'))
+                                @if ($errors->has('profile'))
                                 <span class="help-block" role="alert">{{ $errors->first('profile') }}</span>
                                 @endif
 
@@ -355,31 +355,36 @@
 
                             <div class=" col col-md-4  my-2">
                                 <label class="form-check-label" for="brid">জন্ম নিবন্ধন আপলোড করুন</label>
-                                <br><img id="blah3" onchange="validateMultipleImage('blah3')" alt="image" src="" height="180px" width="180px" onerror="this.onerror=null;this.src='https://www.jamiemaison.com/creating-a-simple-text-editor/placeholder.png';" required />
+                                <br>
+                                <!-- <img id="blah3" onchange="validateMultipleImage('blah3')" alt="image" src="" height="180px" width="180px" onerror="this.onerror=null;this.src='https://www.jamiemaison.com/creating-a-simple-text-editor/placeholder.png';" required /> -->
+                                <img id="blah3" onchange="validateMultipleImage('blah3')" alt="image" src="" height="180px" width="180px" onerror="this.onerror=null;this.src='https://www.jamiemaison.com/creating-a-simple-text-editor/placeholder.png';" required />
+                                <!-- <img src="{{ asset('circular').'/'.$circular[0]->circular_image }}" width="100%" height="100%" /> -->
                                 <br><input type="file" class="mt-2" name="brid" onchange="document.getElementById('blah3').src = window.URL.createObjectURL(this.files[0]); show(this)" accept=".jfif,.jpg,.jpeg,.png,.gif" required>
 
                             </div>
 
                             <div class=" col col-md-4  my-2">
-                                <label class="form-check-label" for="father_nid">পিতার জাতীয় পরিচয়পত্র আপলোড করুন</label>
+                                <label class="form-check-label" for="father_nid">পিতার জাতীয় পরিচয়পত্র আপলোড
+                                    করুন</label>
                                 <br><img id="blah4" onchange="validateMultipleImage('blah4')" alt="image" src="" height="180px" width="180px" onerror="this.onerror=null;this.src='https://www.jamiemaison.com/creating-a-simple-text-editor/placeholder.png';" required />
                                 <br><input type="file" class="mt-2" name="father_nid" onchange="document.getElementById('blah4').src = window.URL.createObjectURL(this.files[0]); show(this)" accept=".jfif,.jpg,.jpeg,.png,.gif" required>
 
                             </div>
 
                             <div class=" col col-md-4  my-2">
-                                <label class="form-check-label" for="testimonial">শিক্ষা প্রতিষ্ঠানের প্রত্যয়নপত্র</label>
+                                <label class="form-check-label" for="testimonial">শিক্ষা প্রতিষ্ঠানের
+                                    প্রত্যয়নপত্র</label>
                                 <br><img id="blah5" onchange="validateMultipleImage('blah5')" alt="image" src="" height="180px" width="180px" onerror="this.onerror=null;this.src='https://www.jamiemaison.com/creating-a-simple-text-editor/placeholder.png';" required />
                                 <br><input type="file" class="mt-2" name="testimonial" onchange="document.getElementById('blah5').src = window.URL.createObjectURL(this.files[0]); show(this)" accept=".jfif,.jpg,.jpeg,.png,.gif" required>
 
                             </div>
 
                             <!-- <div class=" col col-md-4  my-2">
-                                <label class="form-check-label" for="testimonial">সরকারী প্রতিষ্ঠানের প্রত্যয়নপত্র [যদি থাকে]</label>
-                                <br><img id="blah5" onchange="validateMultipleImage('blah5')" alt="image" src="" height="180px" width="180px" onerror="this.onerror=null;this.src='https://www.jamiemaison.com/creating-a-simple-text-editor/placeholder.png';" required />
-                                <br><input type="file" class="mt-2" name="testimonial" onchange="document.getElementById('blah5').src = window.URL.createObjectURL(this.files[0]); show(this)" accept=".jfif,.jpg,.jpeg,.png,.gif" required>
+                                    <label class="form-check-label" for="testimonial">সরকারী প্রতিষ্ঠানের প্রত্যয়নপত্র [যদি থাকে]</label>
+                                    <br><img id="blah5" onchange="validateMultipleImage('blah5')" alt="image" src="" height="180px" width="180px" onerror="this.onerror=null;this.src='https://www.jamiemaison.com/creating-a-simple-text-editor/placeholder.png';" required />
+                                    <br><input type="file" class="mt-2" name="testimonial" onchange="document.getElementById('blah5').src = window.URL.createObjectURL(this.files[0]); show(this)" accept=".jfif,.jpg,.jpeg,.png,.gif" required>
 
-                            </div> -->
+                                </div> -->
 
 
 
@@ -404,7 +409,8 @@
                 <form action="{{ url('/application/edit') }}" method="post">
                     @csrf
                     <input type="hidden" name="app_id" value="{{ $general_info->application_no }}">
-                    <button type="submit" class="btn btn-warning pull-left"><i class="fas fa-edit">&nbsp; </i> Edit</button>
+                    <button type="submit" class="btn btn-warning pull-left"><i class="fas fa-edit">&nbsp; </i>
+                        Edit</button>
                 </form>
 
 
@@ -425,7 +431,7 @@
 <script type="text/javascript">
     function show(input) {
         debugger;
-        var validExtensions = ['jpg', 'png', 'jpeg']; //array of valid extensions
+        var validExtensions = ['jpg', 'png', 'jpeg', 'JPG', 'JPEG', 'PNG', 'bmp', 'BMP']; //array of valid extensions
         var fileName = input.files[0].name;
         var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
         if ($.inArray(fileNameExt, validExtensions) == -1) {
@@ -458,6 +464,6 @@
 <script src="{{ asset('js/util.js') }}"></script>
 
 
-</script>
+@endsection
 
 @endsection

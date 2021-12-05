@@ -10,7 +10,7 @@ class StoreApplicationInfoRequest extends FormRequest
 {
     use BanglaToEnglishConverterTrait;
     /**
-     * 
+     *
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -28,8 +28,8 @@ class StoreApplicationInfoRequest extends FormRequest
      */
     public function rules()
     {
-        
-        $acc_no = BanglaToEnglishConverterTrait::bn2en($request->acc_no);
+
+
 
         return [
 
@@ -80,10 +80,10 @@ class StoreApplicationInfoRequest extends FormRequest
             ],
             'dob' => [
                 'required',
-                'date_format:' . config('panel.date_format'),
+                // 'date_format:' . config('panel.date_format'),
             ],
 
-            'division_id' => [
+            'a_division_id' => [
                 'required',
                 'numeric',
             ],

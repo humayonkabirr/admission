@@ -1,5 +1,12 @@
 @extends('layouts.admin')
 
+@section('styles')
+    <style>
+        .panel-default{
+        box-shadow: 0px 0px 7px #606060;
+    }
+    </style>
+@endsection
 @section('content')
 <div class="content">
 

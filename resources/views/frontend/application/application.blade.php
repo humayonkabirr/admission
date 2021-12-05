@@ -66,7 +66,7 @@
 
                 <div class="panel-heading">
 
-                    ভর্তি সহায়তার আবেদন ফর্ম
+                    ভর্তি সহায়তার আবেদন
                 </div>
                 <div class="panel-body">
                     <p class="header-note"> [*] চিহ্নিত ঘরগুলো অবশ্যই পূরণ করতে হবে। সকল তথ্য ইউনিকোড বাংলায় পূরণ করুন। </p>
@@ -203,7 +203,7 @@
 
                                 @php $district = App\Models\District::where('division_name_id',old('division_id'))->get();
                                 @endphp
-                                @php $upazila = App\Models\Upazila::where('district_id',old('districts_id'))->get();
+                                @php $upazila = App\Models\Upazila::where('district_id',old('district_id'))->get();
                                 @endphp
                                 @php $union = App\Models\Union::where('upazila_id',old('upazila_id'))->get();
                                 @endphp
@@ -211,7 +211,7 @@
 
                                 <div class="col-md-6 {{ $errors->has('division') ? 'has-error' : '' }}">
                                     <label class="required" for="division_id">{{ trans('cruds.generalInfo.fields.division') }}</label>
-                                    <select class="form-control select2" name="division_id" id="division_id" required>
+                                    <select class="form-control select2" name="a_division_id" value="" id="division_id" required>
                                         <option value="">{{ trans('global.pleaseSelect') }}</option>
                                         @foreach($divisions as $id => $entry)
                                         <option value="{{ $entry->id }}" {{ old('division_id') == $entry->id ? 'selected' : ''}}>{{ $entry->division_name }}</option>
@@ -226,12 +226,14 @@
 
                                 <div class="col-md-6 {{ $errors->has('district') ? 'has-error' : '' }}">
                                     <label class="required" for="district_id">{{ trans('cruds.generalInfo.fields.district') }}</label>
-                                    <select class="form-control select2" name="district_id" id="district_id" required>
-                                        <option id="nullValueOption" value=''> {{ trans('global.pleaseSelect') }}
+                                    <select class="form-control select2" name="a_district_id" id="district_id" required>
+                                        <option id="nullValueOption" value=""> {{ trans('global.pleaseSelect') }}
                                         </option>
-                                        @if (old('division_id'))
+                                        <option id="nullValueOption" value="yyyTest"> Texdgd
+                                        </option>
+                                        @if (old('district_id'))
                                         @foreach ($district as $data)
-                                        <option value='{{ $data->id }}' {{ $data->id == old('districts_id') ? 'selected' : '' }}>
+                                        <option value="{{ $data->id }}" {{ $data->id == old('district_id') ? 'selected' : '' }}>
                                             {{ $data->district_name }}
                                         </option>
                                         @endforeach

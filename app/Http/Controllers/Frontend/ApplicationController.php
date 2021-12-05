@@ -30,7 +30,7 @@ use App\Models\McuType;
 use Exception;
 use PDF;
 use DB;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
@@ -65,7 +65,7 @@ class ApplicationController extends Controller
      */
     public function store(StoreApplicationInfoRequest $request)
     {
-        //  dd($request);
+         // dd($request->all());
         // return  $request;
 
         $validatedData = $request->validate([
@@ -104,8 +104,6 @@ class ApplicationController extends Controller
 
         //return $appNo;
 
-        $request->acc_no = BanglaToEnglishConverterTrait::bn2en($request->acc_no);
-
         $generalInfo =  new GeneralInfo([
             'user_id_no' => $user_id_no,
             'application_no' => $appNo,
@@ -121,8 +119,8 @@ class ApplicationController extends Controller
             'age' => $age,
             'village' => $request->village_id,
             'circular_id' => $request->circular_id,
-            'division_id' => $request->division_id,
-            'district_id' => $request->districts_id,
+            'division_id' => $request->a_division_id,
+            'district_id' => $request->a_district_id,
             'upazila_id' => $request->upazila_id,
             'union_id' => $request->union_id,
 
@@ -359,12 +357,17 @@ class ApplicationController extends Controller
 
         $pdf->WriteHTML($this->pdf_html($id));
 
+
+        $pdf->Output("uploads/applicants_copy/" . $file_name, 'F');
         $pdf->Output($file_name, 'D');
     }
 
     function pdf_html($id)
     {
+        $user_id_no = auth()->user()->id;
 
+
+        $user = User::where('id', $user_id_no);
         $general_info = GeneralInfo::where('id', $id)->first();
         $family_info = FamilyInfo::where('application_number_id', $general_info->id)->first();
         $educationInstitute_info = EducationInstituteInfo::where('application_number_id', $general_info->id)->first();
@@ -374,6 +377,7 @@ class ApplicationController extends Controller
 
         $data = [
             'foo' => 'bar',
+            'user' => $user,
             'general_info' => $general_info,
             'family_info' => $family_info,
             'educationInstitute_info' => $educationInstitute_info,
@@ -486,7 +490,7 @@ class ApplicationController extends Controller
                 // echo 'No generalInfoDataCheck ';
             }
             if (!empty($generalInfoDataCheck)) {
-                echo 'Already Appliaction Data Exists';
+                return view('message.applicationExpired');
             } else {
                 // dd($daysDiff);
                 //return view('student.application')->with('circulars', $circularData);
@@ -494,7 +498,7 @@ class ApplicationController extends Controller
                     $appNo = ApplicationTracking::where('user_id_no_id', auth()->user()->id)->where('cirID', $circulars[0]->id)->first();
 
                     if ($appNo && $appNo->is_submitted == 1) {
-                        echo 'Already Appliaction Data Exists';
+                        return view('message.applicationExpired');
                     } elseif ($appNo && $appNo->is_completed == 1) {
                         $general_info = GeneralInfo::where('application_no', $appNo->application_no)->first();
 

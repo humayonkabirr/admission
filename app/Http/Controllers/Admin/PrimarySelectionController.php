@@ -131,62 +131,73 @@ class PrimarySelectionController extends Controller
   public function get_result(Request $request, $id){
 
       $cid = $request->circular_id;
-      if (!empty($cid) && empty($gpa) && empty($division)) {
+      $gpa = $request->last_gpa;
+      $division = $request->division_id;
+      $district = $request->district_id;
+      $upazila = $request->upazila_id;
+      $familyStatus = $request->family_status_id;
+      $family_member = $request->family_member_id;
+      
+      if (!empty($cid) && empty($division) && empty($gpa)  && empty($familyStatus) && empty($family_member) ) {
         $results = DB::table('general_infos')
                   ->join('education_institute_infos', 'general_infos.id', '=', 'education_institute_infos.application_number_id')
                   ->select('*')->where('circular_id', $cid)->get();
       }
-
-      $gpa = $request->last_gpa;
-      $division = $request->division_id;
-      if (!empty($gpa) && empty($division)) {
+      elseif(!empty($cid) && !empty($upazila) && empty($gpa)  && empty($familyStatus) && empty($family_member) ){
         $results = DB::table('general_infos')
                   ->join('education_institute_infos', 'general_infos.id', '=', 'education_institute_infos.application_number_id')
-                  ->select('*')->where('circular_id', $cid)->where('last_gpa', '>=', $gpa)->get();
+                  ->select('*')->where('circular_id', $cid)->where('upazila_id', $upazila)->get();
       }
-
-
-      if (!empty($gpa) && !empty($division)) {
+      elseif(!empty($cid) && !empty($district) && empty($gpa)  && empty($familyStatus) && empty($family_member) ){
         $results = DB::table('general_infos')
                   ->join('education_institute_infos', 'general_infos.id', '=', 'education_institute_infos.application_number_id')
-                  ->select('*')->where('circular_id', $cid)->where('division_id', $division)->where('last_gpa', '>=', $gpa)->get();
+                  ->select('*')->where('circular_id', $cid)->where('district_id', $district)->get();
       }
-
-       $division = $request->division_id;
-      if (!empty($division && empty($gpa))) {
+      elseif(!empty($cid) && !empty($division) && empty($gpa)  && empty($familyStatus) && empty($family_member) ){
         $results = DB::table('general_infos')
                   ->join('education_institute_infos', 'general_infos.id', '=', 'education_institute_infos.application_number_id')
                   ->select('*')->where('circular_id', $cid)->where('division_id', $division)->get();
       }
 
-      $district = $request->district_id;
-      if (!empty($district) && empty($gpa)) {
-        $results = DB::table('general_infos')
-                  ->join('education_institute_infos', 'general_infos.id', '=', 'education_institute_infos.application_number_id')
-                  ->select('*')->where('circular_id', $cid)->where('district_id', $district)->get();
-      }
-      $district = $request->district_id;
-      if (!empty($district) && !empty($gpa)) {
-        $results = DB::table('general_infos')
-                  ->join('education_institute_infos', 'general_infos.id', '=', 'education_institute_infos.application_number_id')
-                  ->select('*')->where('circular_id', $cid)->where('district_id', $district)->where('last_gpa', '>=', $gpa)->get();
-      }
-
-      $upazila = $request->upazila_id;
-      if (!empty($upazila) && empty($gpa)) {
-        $results = DB::table('general_infos')
-                  ->join('education_institute_infos', 'general_infos.id', '=', 'education_institute_infos.application_number_id')
-                  ->select('*')->where('circular_id', $cid)->where('upazila_id', $upazila)->get();
-      }
-      $upazila = $request->upazila_id;
-      if (!empty($upazila) && !empty($gpa)) {
+         
+      elseif(!empty($cid) && !empty($upazila) && !empty($gpa)  && empty($familyStatus) && empty($family_member) ){
         $results = DB::table('general_infos')
                   ->join('education_institute_infos', 'general_infos.id', '=', 'education_institute_infos.application_number_id')
                   ->select('*')->where('circular_id', $cid)->where('upazila_id', $upazila)->where('last_gpa', '>=', $gpa)->get();
       }
+         
+      elseif(!empty($cid) && !empty($district)  && !empty($gpa)  && empty($familyStatus) && empty($family_member) ){
+        $results = DB::table('general_infos')
+                  ->join('education_institute_infos', 'general_infos.id', '=', 'education_institute_infos.application_number_id')
+                  ->select('*')->where('circular_id', $cid)->where('district_id', $district)->where('last_gpa', '>=', $gpa)->get();
+      }
+         
+      elseif(!empty($cid) && !empty($division) && !empty($gpa)  && empty($familyStatus) && empty($family_member) ){
+        $results = DB::table('general_infos')
+                  ->join('education_institute_infos', 'general_infos.id', '=', 'education_institute_infos.application_number_id')
+                  ->select('*')->where('circular_id', $cid)->where('division_id', $division)->where('last_gpa', '>=', $gpa)->get();
+      }
+   
+      elseif(!empty($cid) && !empty($gpa)  && empty($familyStatus) && empty($family_member) ){
+        $results = DB::table('general_infos')
+                  ->join('education_institute_infos', 'general_infos.id', '=', 'education_institute_infos.application_number_id')
+                  ->select('*')->where('circular_id', $cid)->where('last_gpa', '>=', $gpa)->get();
+      }
+      elseif(!empty($cid) && empty($gpa)  && empty($familyStatus) && !empty($family_member) ){
+        $results = DB::table('general_infos')
+                  ->join('family_infos', 'general_infos.id', '=', 'family_infos.application_number_id')
+                  ->select('*')->where('circular_id', $cid)->where('familystatus_id', $familyStatus)->get();
+      }
+      elseif(!empty($cid) && empty($gpa)  && !empty($familyStatus) && empty($family_member) ){
+        $results = DB::table('general_infos')
+                  ->join('family_infos', 'general_infos.id', '=', 'family_infos.application_number_id')
+                  ->select('*')->where('circular_id', $cid)->where('family_member', $family_member)->get();
+      }
 
-
-
+      // $results = DB::table('general_infos')
+      //             ->join('family_infos', 'general_infos.id', '=', 'family_infos.application_number_id')
+      //             ->select('*')->get();
+      // dd($results);
 
       if ($id == "0") {
         $finalSelection = PrimarySelectionCriteria::create($request->all());
