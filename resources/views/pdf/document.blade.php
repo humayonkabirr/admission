@@ -11,8 +11,6 @@
 
 
         .watermark {
-
-
             content: "PMEAT";
 
             background-size: 100%;
@@ -120,7 +118,6 @@
         #heading {
             font-weight: bold;
         }
-
     </style>
 
 
@@ -154,7 +151,7 @@
             ভর্তি সহায়তার আবেদন
         </div>
         <div class="right">
-            <h3>সাধারণ তথ্য</h3> 
+            <h3>সাধারণ তথ্য</h3>
             <hr>
 
             <table style="margin: 12px 0px">
@@ -177,8 +174,8 @@
                             <li>মাতার নাম: {{ $general_info->mother_name }}</li>
                             @if (!empty($general_info->mother_name))<li>মাতার এনআইডি: {{ $general_info->mother_nid }}</li> @endif
                             @if (!empty($general_info->father_nid))<li>পিতার এনআইডি: {{ $general_info->father_nid }}</li> @endif
-                            
-                            
+
+
                         </ul>
                         </p>
                     </td>
@@ -187,8 +184,8 @@
                         <p>
                         <ul>
                             <li>লিঙ্গ: {{ $general_info->gender }}</li>
-                     
-                           
+
+
                             <U>বর্তমান ঠিকানা</U>
                             <li>বিভাগ: {{ $general_info->division->division_name }}</li>
                             <li>জেলা: {{ $general_info->district->district_name }}</li>
@@ -240,7 +237,8 @@
                         <td style="width: 60%">
                             <ul>
                                 <li>ভর্তিচ্ছুক প্রতিষ্ঠানের বিভাগ:
-                                    {{ $educationInstitute_info->division->division_name }}</li>
+                                    {{ $educationInstitute_info->division->division_name }}
+                                </li>
                                 <li>ভর্তিচ্ছুক প্রতিষ্ঠানের জেলা:
                                     {{ $educationInstitute_info->district->district_name }}
                                 </li>
@@ -249,7 +247,8 @@
                                 </li>
                                 <li>ভর্তি ইচ্ছুক প্রতিষ্ঠানের নাম:
                                     {{ $educationInstitute_info->institute_name->institution_name }}
-                                    ({{ $educationInstitute_info->institute_name->institution_eiin_no }})</li>
+                                    ({{ $educationInstitute_info->institute_name->institution_eiin_no }})
+                                </li>
                             </ul>
 
                         </td>
@@ -274,10 +273,10 @@
 
             <table>
                 @if (!empty($accountinfo->banking_type->banking_type_id))
-                    <tr>
-                        <td width="35%">ব্যাংকিং ধরণ</td>
-                        <td>{{ $accountinfo->banking_type->banking_type_id }}</td>
-                    </tr>
+                <tr>
+                    <td width="35%">ব্যাংকিং ধরণ</td>
+                    <td>{{ $accountinfo->banking_type->banking_type_id }}</td>
+                </tr>
                 @endif
 
                 <tr>
@@ -290,19 +289,19 @@
                 </tr>
 
                 @if (!empty($accountinfo->district->district_name))
-                    <tr>
-                        <td width="35%">জেলা</td>
-                        <td>{{ !empty($accountinfo->district->district_name) ? $accountinfo->district->district_name : '' }}
-                        </td>
-                    </tr>
+                <tr>
+                    <td width="35%">জেলা</td>
+                    <td>{{ !empty($accountinfo->district->district_name) ? $accountinfo->district->district_name : '' }}
+                    </td>
+                </tr>
                 @endif
 
 
                 @if (!empty($accountinfo->bank_branch->branch_name))
-                    <tr>
-                        <td width="35%">ব্যাংকের শাখা</td>
-                        <td>{{ $accountinfo->bank_branch->branch_name }}</td>
-                    </tr>
+                <tr>
+                    <td width="35%">ব্যাংকের শাখা</td>
+                    <td>{{ $accountinfo->bank_branch->branch_name }}</td>
+                </tr>
                 @endif
 
 
@@ -331,8 +330,7 @@
                         <h3> আবেদনকারীর স্বাক্ষর: </h3>
                     </td>
                     <td>
-                        <img src="{{ asset('uploads/sign/' . $document->signature) }}" height="80px" width="220px"
-                            alt="Signature" />
+                        <img src="{{ asset('uploads/sign/' . $document->signature) }}" height="80px" width="220px" alt="Signature" />
                     </td>
                 </tr>
             </table>
@@ -341,8 +339,8 @@
 
 
     <footer style="font-size:5px">
-        প্রিন্টের তারিখঃ  {{ date('Y-m-d H:i:s') }}
-             
+        প্রিন্টের তারিখঃ {{ date('Y-m-d H:i:s') }}
+
     </footer>
 
 </body>

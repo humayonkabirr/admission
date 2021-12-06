@@ -67,7 +67,7 @@
                             <td>
                                 @if(!empty($application->app_id->id) && $application->is_submitted != 1)
                                 <a type="button" href="{{ url('submit_document/'.$application->application_no) }}" class="badge badge-success">
-                                    Submit Document
+                                    ডকুমেন্ট আপলোড করুন
                                 </a>
                                 @endif
                             </td>
@@ -96,10 +96,10 @@
 
                     @if(!empty($circular))
 
+                    <p>{{$circular[0]->id}}</p>
+                    <img src="{{ asset('circular').'/'.$circular[0]->circular_image }}" width="100%" height="100%" />
 
-                    <img src="{{ asset('circular').'/'.$circular->circular_image}}" width="100%" height="100%" />
-
-                    <a class="btn btn-success pull-right" href="{{route('frontend.application.apply',$circular->id)}}">Apply </a>
+                    <a class="btn btn-success pull-right" href="{{route('frontend.application.apply',$circular[0]->id)}}">Apply </a>
 
                     @else
                     {{ trans('global.zero_circluar') }}
