@@ -26,8 +26,21 @@
             font-family: nikosh;
             src: url('{{ asset("font/Nikosh.tff") }}');
         }
+		.navbar-light .navbar-nav .nav-link {
+			color: #198754;
+			font-size: 30px;
+			
+		}
+		.navbar-nav .nav-link {
+			
+			padding-right: 0;
+			padding-left: 5%;
+		}
 
-
+		.bg-light {
+			background: #ffffff !important;
+			box-shadow: 1px 1px 1px #f90808;
+		}
         body {
             font-family: "nikosh" !important;
             font-size: 20px;
@@ -335,6 +348,14 @@
         .nav-item>.nav-link {
             font-weight: bold;
         }
+		
+		footer {
+		  margin: 0 auto;
+		  position: absolute;
+		  bottom:0;
+		  height: 2.4em;
+		  border-top: 1px solid black;
+		} 
     </style>
 
 </head>
@@ -506,16 +527,12 @@
 
                     </div>
             </section>
+			 
         </div>
+		  
+		
     </main>
-    <footer class="footer mt-auto py-3 bg-light" style="position:absolute; padding-top: 60px;">
-        <div class="container">
-            <span class="text-muted  float-start ">
-                নির্মাতা-  প্রোগ্রামার,পিএমইটি
-            </span> &nbsp; &nbsp;
-            <span class="float-end">কপিরাইট &copy;প্রধানমন্ত্রীর শিক্ষা সহায়তা ট্রাস্ট</span>
-        </div>
-    </footer>
+    
 
 
     <!-- Modal -->
@@ -547,6 +564,7 @@
 
                 </div>
 
+				
                 <!-- Modal footer -->
                 <div class=" modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
