@@ -14,7 +14,7 @@ class FinalSelection extends Model
     use Auditable;
     use HasFactory;
 
-    public $table = 'final_selections';
+    public $table = 'primary_selections';
 
     protected $dates = [
         'created_at',
@@ -56,6 +56,17 @@ class FinalSelection extends Model
     public function education_institute()
     {
         return $this->belongsTo(EducationalInstitute::class, 'education_institute_id');
+    }
+
+    public function documents()
+    {
+        return $this->belongsTo(Document::class, 'app_number_id', 'app_number');
+    }
+
+    public function appNumber()
+    {
+        // return $this->belongsTo(ApplicationTracking::class, 'application_no', 'application_no');
+        return $this->belongsTo(GeneralInfo::class, 'id', 'application_no');
     }
 
     public function eiin()

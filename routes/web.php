@@ -58,8 +58,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('divisions', 'DivisionController');
 
     // District
-    Route::get('get-districts/{id}', function($id){
-      return json_encode(App\Models\District::where('division_name_id', $id)->get());
+    Route::get('get-districts/{id}', function ($id) {
+        return json_encode(App\Models\District::where('division_name_id', $id)->get());
     });
     Route::delete('districts/destroy', 'DistrictController@massDestroy')->name('districts.massDestroy');
     Route::post('districts/parse-csv-import', 'DistrictController@parseCsvImport')->name('districts.parseCsvImport');
@@ -67,8 +67,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('districts', 'DistrictController');
 
     // Thana
-    Route::get('get-upazilas/{id}', function($id){
-      return json_encode(App\Models\Upazila::where('district_id', $id)->get());
+    Route::get('get-upazilas/{id}', function ($id) {
+        return json_encode(App\Models\Upazila::where('district_id', $id)->get());
     });
     Route::delete('thanas/destroy', 'ThanaController@massDestroy')->name('thanas.massDestroy');
     Route::post('thanas/parse-csv-import', 'ThanaController@parseCsvImport')->name('thanas.parseCsvImport');
@@ -235,7 +235,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Final Selection
     Route::delete('final-selections/destroy', 'FinalSelectionController@massDestroy')->name('final-selections.massDestroy');
+    Route::get('final-selections/app-number-id/{id}', 'FinalSelectionController@app_number')->name('final-selections.app_number');
+    Route::post('final-selections/check/{id}', 'FinalSelectionController@get_result')->name('final-selections.get_result');
     Route::resource('final-selections', 'FinalSelectionController');
+
 
     // Final Selection Criteria
     Route::delete('final-selection-criteria/destroy', 'FinalSelectionCriteriaController@massDestroy')->name('final-selection-criteria.massDestroy');
@@ -307,6 +310,9 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     Route::get('/home', 'HomeController@index')->name('home');
 
     // Application   :: FOR ONLY APPLICATION SUBMISSION
+    Route::get('application/verify-documents', 'ApplicationController@verifyDocument')->name('application.verify');
+    Route::post('application/verify-documents', 'ApplicationController@verifyDocumentSubmit')->name('application.verify.submit');
+    Route::post('application/application-documents', 'ApplicationController@applicationDocument')->name('application');
     Route::get('application/apply/{id}', 'ApplicationController@apply')->name('application.apply');
     Route::get('application/apply', 'ApplicationController@apply')->name('application.applynow');
     Route::resource('application', 'ApplicationController');

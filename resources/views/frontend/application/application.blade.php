@@ -229,8 +229,6 @@
                                     <select class="form-control select2" name="a_district_id" id="district_id" required>
                                         <option id="nullValueOption" value=""> {{ trans('global.pleaseSelect') }}
                                         </option>
-                                        <option id="nullValueOption" value="yyyTest"> Texdgd
-                                        </option>
                                         @if (old('district_id'))
                                         @foreach ($district as $data)
                                         <option value="{{ $data->id }}" {{ $data->id == old('district_id') ? 'selected' : '' }}>

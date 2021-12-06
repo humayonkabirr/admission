@@ -4,8 +4,8 @@
     @can('final_selection_criterion_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.primary-selection-criteria.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.primarySelectionCriterion.title_singular') }}
+            <a class="btn btn-success" href="{{ route('admin.final-selection-criteria.create') }}">
+                {{ trans('global.add') }} {{ trans('cruds.finalSelectionCriterion.title_singular') }}
             </a>
             <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
                 {{ trans('global.app_csvImport') }}
@@ -18,21 +18,21 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ trans('cruds.primarySelectionCriterion.title_singular') }} {{ trans('global.list') }}
+                    {{ trans('cruds.finalSelectionCriterion.title_singular') }} {{ trans('global.list') }}
                 </div>
                 <div class="panel-body">
-                    <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable           FinalSelectionCriterion">
+                    <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable FinalSelectionCriterion">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>
-                                    {{ trans('cruds.primarySelectionCriterion.fields.primary_criteria_name') }}
+                                    {{ trans('cruds.finalSelectionCriterion.fields.final_criteria_name') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.primarySelectionCriterion.fields.cirular') }}
+                                    {{ trans('cruds.finalSelectionCriterion.fields.cirular') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.primarySelectionCriterion.fields.division') }}
+                                    {{ trans('cruds.finalSelectionCriterion.fields.division') }}
                                 </th>
                                 <th>
                                     {{ trans('cruds.finalSelectionCriterion.fields.district') }}
@@ -56,10 +56,10 @@
                                     &nbsp;
                                 </th>
                             </tr>
-                            @foreach ($PrimarySelectionCriterions as $key => $criteria)
+                            @foreach ($FinalSelectionCriterions as $key => $criteria)
                             <tr>
                                 <td>{{$key + 1}}</td>
-                                <td>{{$criteria->primary_criteria_name}}</td>
+                                <td>{{$criteria->final_criteria_name}}</td>
                                 <td>{{$criteria->cirular->cirucular_name ?? '--' }}</td>
                                 <td>{{$criteria->division->division_name ?? '--'}}</td>
                                 <td>{{$criteria->district->district_name ?? '--'}}</td>

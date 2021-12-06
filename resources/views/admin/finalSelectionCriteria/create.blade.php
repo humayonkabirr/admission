@@ -14,19 +14,19 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ trans('global.create') }} {{ trans('cruds.primarySelectionCriterion.title_singular') }}
+                    {{ trans('global.create') }} {{ trans('cruds.finalSelectionCriterion.title_singular') }}
                 </div>
                 <div class="panel-body">
-                    <form id="form_primary_check" method="POST" action="{{ url('admin/primary-selections/check/0') }}" enctype="multipart/form-data">
+                    <form id="form_final_check" method="POST" action="{{ url('admin/final-selections/check/0') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="col-md-6">
-                            <div class="form-group {{ $errors->has('primary_criteria_name') ? 'has-error' : '' }}">
-                                <label class="required" for="primary_criteria_name">{{ trans('cruds.primarySelectionCriterion.fields.primary_criteria_name') }}</label>
-                                <input class="form-control" type="text" name="primary_criteria_name" id="primary_criteria_name" value="{{ old('primary_criteria_name', '') }}" required>
-                                @if($errors->has('primary_criteria_name'))
-                                    <span class="help-block" role="alert">{{ $errors->first('primary_criteria_name') }}</span>
+                            <div class="form-group {{ $errors->has('final_criteria_name') ? 'has-error' : '' }}">
+                                <label class="required" for="final_criteria_name">{{ trans('cruds.finalSelectionCriterion.fields.final_criteria_name') }}</label>
+                                <input class="form-control" type="text" name="final_criteria_name" id="final_criteria_name" value="{{ old('final_criteria_name', '') }}" required>
+                                @if($errors->has('final_criteria_name'))
+                                    <span class="help-block" role="alert">{{ $errors->first('final_criteria_name') }}</span>
                                     @endif
-                                    <span class="help-block">{{ trans('cruds.primarySelectionCriterion.fields.primary_criteria_name_helper') }}</span>
+                                    <span class="help-block">{{ trans('cruds.finalSelectionCriterion.fields.final_criteria_name_helper') }}</span>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -163,10 +163,10 @@
     // get circular date
     $("#app_number").keypress(function() {
         var app_number = this.value;
-        $("#primary_selection_set").html("");
+        $("#final_selection_set").html("");
         var table = "";
         var url = "{{ url('/admin') }}"
-        $.get(url + "/primary-selections/app-number-id/" + app_number, function(data) {
+        $.get(url + "/final-selections/app-number-id/" + app_number, function(data) {
             data = JSON.parse(data);
             data = JSON.parse(data);
             alert(data.length);
@@ -174,10 +174,10 @@
     });
     // $("#cirular_id").change(function() {
     //     var cirular_id = $("#cirular_id").val();
-    //     $("#primary_selection_set").html("");
+    //     $("#final_selection_set").html("");
     //     var table = 0;
     //     var url = "{{ url('/admin') }}"
-    //     $.get(url + "/primary-selections/circular-id/" + cirular_id, function(data) {
+    //     $.get(url + "/final-selections/circular-id/" + cirular_id, function(data) {
     //         data = JSON.parse(data);
     //         alert(data.length);
     //     });
@@ -217,12 +217,12 @@
         // $("#formaddbtn").button('loading');
         e.preventDefault();
         // Get form
-        var form = $('#form_primary_check')[0];
+        var form = $('#form_final_check')[0];
         // FormData object
         var data = new FormData(form);
 
         $.ajax({
-            url: "{{ url('admin/primary-selections/check/1') }}",
+            url: "{{ url('admin/final-selections/check/1') }}",
             type: "POST",
             data: data,
             dataType: 'json',

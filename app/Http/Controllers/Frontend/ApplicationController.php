@@ -222,100 +222,10 @@ class ApplicationController extends Controller
         $item->userid = $req->input('user_id');
         $item->app_number_id = $req->input('app_number_id');
 
-
-        /*$this->validate($req, [
-	    	'profile' => 'mimes:jpg,png,jpeg,gif,svg',
-            'sign' => 'mimes:jpg,png,jpeg,gif,svg',
-            'brid' => 'mimes:jpg,png,jpeg,gif,svg',
-            'father_nid' => 'mimes:jpg,png,jpeg,gif,svg',
-            'testimonial' => 'mimes:jpg,png,jpeg,gif,svg',
-		]);*/
-
-
-        if ($req->hasfile('profile')) {
-            $destination = 'uploads/profile/' . $item->profile;
-            if (File::exists($destination)) {
-                File::delete($destination);
-            }
-
-            $file = $req->file('profile');
-
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-
-            Image::make($file)->resize(600, 600)
-                ->save('uploads/profile/' . $filename, 100);
-
-            $item->profile = $filename;
-        }
-
-        if ($req->hasfile('sign')) {
-            $destination = 'uploads/sign/' . $item->signature;
-            if (File::exists($destination)) {
-                File::delete($destination);
-            }
-
-            $file = $req->file('sign');
-
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-
-            Image::make($file)->resize(600, 200)
-                ->save('uploads/sign/' . $filename, 100);
-
-            $item->signature = $filename;
-        }
-
-        if ($req->hasfile('brid')) {
-            $destination = 'uploads/brid/' . $item->brid;
-            if (File::exists($destination)) {
-                File::delete($destination);
-            }
-
-            $file = $req->file('brid');
-
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-
-            Image::make($file)->resize(600, 600)
-                ->save('uploads/brid/' . $filename, 100);
-
-            $item->brid = $filename;
-        }
-
-        if ($req->hasfile('father_nid')) {
-            $destination = 'uploads/father_nid/' . $item->father_nid;
-            if (File::exists($destination)) {
-                File::delete($destination);
-            }
-
-            $file = $req->file('father_nid');
-
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-
-            Image::make($file)->resize(600, 600)
-                ->save('uploads/father_nid/' . $filename, 100);
-
-            $item->father_nid = $filename;
-        }
-
-        if ($req->hasfile('testimonial')) {
-            $destination = 'uploads/testimonial/' . $item->brid;
-            if (File::exists($destination)) {
-                File::delete($destination);
-            }
-
-            $file = $req->file('testimonial');
-
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-
-            Image::make($file)->resize(600, 600)
-                ->save('uploads/testimonial/' . $filename, 100);
-
-            $item->testimonial = $filename;
-        }
+        $item->profile = $req->profile;
+        $item->signature = $req->sign;
+        $item->brid = $req->brid;
+        $item->father_nid = $req->father_nid;
 
         $item->save();
 
@@ -443,8 +353,16 @@ class ApplicationController extends Controller
      */
     public function apply(Request $request)
     {
-
-
+      $studentImage = auth()->user()->student_image;
+      $studentSignature = auth()->user()->student_signature;
+      $birthCrtificate = auth()->user()->birth_certificate;
+      $graduationNid = auth()->user()->graduation_nid;
+      // $generalImage = GeneralInfo::where('application_no', $id)->first();
+      // dd($studentImage);
+      if (empty($studentImage) || empty($studentSignature) || empty($birthCrtificate) || empty($graduationNid)) {
+        // code...
+        return view('frontend.application.student_document');
+      }
         try {
             $circulars = Circular::where('circular_status', 1)->get();
             foreach ($circulars as $key => $value) {
@@ -540,6 +458,110 @@ class ApplicationController extends Controller
             echo "divisions or Circular Error! No Resources";
             // redirect()->to('500');
         }
+    }
+
+    public function applicationDocument(Request $req)
+    {
+      $item = User::where('id', Auth::user()->id)->first();
+
+      if ($req->hasfile('profile')) {
+          $destination = 'uploads/profile/' . $req->profile;
+          if (File::exists($destination)) {
+              File::delete($destination);
+          }
+
+          $file = $req->file('profile');
+
+          $extension = $file->getClientOriginalExtension();
+          $filename = time() . '.' . $extension;
+
+          Image::make($file)->resize(600, 600)
+              ->save('uploads/profile/' . $filename, 100);
+
+          $item->student_image = $filename;
+      }
+
+      if ($req->hasfile('sign')) {
+          $destination = 'uploads/sign/' . $req->signature;
+          if (File::exists($destination)) {
+              File::delete($destination);
+          }
+
+          $file = $req->file('sign');
+
+          $extension = $file->getClientOriginalExtension();
+          $filename = time() . '.' . $extension;
+
+          Image::make($file)->resize(600, 200)
+              ->save('uploads/sign/' . $filename, 100);
+
+          $item->student_signature = $filename;
+      }
+
+      if ($req->hasfile('brid')) {
+          $destination = 'uploads/brid/' . $req->brid;
+          if (File::exists($destination)) {
+              File::delete($destination);
+          }
+
+          $file = $req->file('brid');
+
+          $extension = $file->getClientOriginalExtension();
+          $filename = time() . '.' . $extension;
+
+          Image::make($file)->resize(600, 600)
+              ->save('uploads/brid/' . $filename, 100);
+
+          $item->birth_certificate = $filename;
+      }
+
+      if ($req->hasfile('father_nid')) {
+          $destination = 'uploads/father_nid/' . $req->father_nid;
+          if (File::exists($destination)) {
+              File::delete($destination);
+          }
+
+          $file = $req->file('father_nid');
+
+          $extension = $file->getClientOriginalExtension();
+          $filename = time() . '.' . $extension;
+
+          Image::make($file)->resize(600, 600)
+              ->save('uploads/father_nid/' . $filename, 100);
+
+          $item->graduation_nid = $filename;
+      }
+
+      $item->save();
+
+      return redirect()->route('frontend.application.applynow');
+    }
+
+    public function verifyDocument()
+    {
+      return view('frontend.application.verify_document');
+    }
+
+    public function verifyDocumentSubmit()
+    {
+      dd('test');
+      if ($req->hasfile('father_nid')) {
+          $destination = 'uploads/father_nid/' . $req->father_nid;
+          if (File::exists($destination)) {
+              File::delete($destination);
+          }
+
+          $file = $req->file('father_nid');
+
+          $extension = $file->getClientOriginalExtension();
+          $filename = time() . '.' . $extension;
+
+          Image::make($file)->resize(600, 600)
+              ->save('uploads/father_nid/' . $filename, 100);
+
+          $item->graduation_nid = $filename;
+      }
+      return back();
     }
 
     public function submit_document($id)
