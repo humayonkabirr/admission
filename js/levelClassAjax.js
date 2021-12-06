@@ -15,6 +15,7 @@ $(document).on("change", "#class_name_id", function () {
     getLastClass(class_name_id);
 });
 
+// get Level wise class List 
 function getLevelWiseClassList(id) {
     var base_url = window.location.origin;
     let url = base_url + "/admission/findLevelWiseClass";
