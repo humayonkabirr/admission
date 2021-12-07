@@ -527,7 +527,6 @@
                                         <div class="invalid-feedback">{{trans('global.select_something')}}</div>
                                 </div>
 
-
                                 <div class="col-md-6 {{ $errors->has('eiin') ? 'has-error' : '' }}" hidden>
                                     <label class="required" for="eiin_id">{{ trans('cruds.educationInstituteInfo.fields.eiin') }}</label>
                                     <input class="form-control" type="text" name="eiin_id" id="eiin_id" value="{{ old('eiin', '') }}" required>
