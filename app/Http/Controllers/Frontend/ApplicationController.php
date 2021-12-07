@@ -424,7 +424,7 @@ class ApplicationController extends Controller
                         $educationInstitute_info = EducationInstituteInfo::where('application_number_id', $general_info->id)->first();
                         $accountinfo = AccountInfo::where('app_number_id', $general_info->id)->first();
 
-                        //developing in progress.............
+                       
                         return view('frontend.application.application_document')
                             ->with('general_info', $general_info)
                             ->with('family_info', $family_info)
@@ -460,6 +460,7 @@ class ApplicationController extends Controller
         }
     }
 
+    //User Table Image Sign BRID Father_nid 
     public function applicationDocument(Request $req)
     {
       $item = User::where('id', Auth::user()->id)->first();
@@ -542,9 +543,10 @@ class ApplicationController extends Controller
       return view('frontend.application.verify_document');
     }
 
+    // Recommended Application Scan Copy submitted 
     public function verifyDocumentSubmit()
     {
-      dd('test');
+     
       if ($req->hasfile('father_nid')) {
           $destination = 'uploads/father_nid/' . $req->father_nid;
           if (File::exists($destination)) {
