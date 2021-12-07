@@ -16,31 +16,6 @@
                             <tbody>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.user.fields.user_photo') }}
-                                    </th>
-                                    <td>
-                                        @if($user->photo)
-                                        <img class="rounded-circle" src="{{ url('public/images').'/'.$user->photo}}" alt="" width="80px" height="80px" />
-                                        @endif
-
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.user.fields.user_signature') }}
-                                    </th>
-                                    <td>
-                                        @if($user->sign)
-                                        <img class="img-thumbnail" src="{{ url('public/images').'/'.$user->sign}}" alt="" width="100px" height="100px" />
-                                        @endif
-
-                                    </td>
-
-                                </tr>
-
-                                <tr>
-                                    <th>
                                         {{ trans('cruds.user.fields.id') }}
                                     </th>
                                     <td>

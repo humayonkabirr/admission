@@ -46,6 +46,11 @@
         width: 100% !important;
 
     }
+
+    .shadow {
+        box-shadow: 0px 0px 6px #747474;
+        padding: 15px;
+    }
 </style>
 @endsection
 
@@ -64,7 +69,7 @@
 
 
 
-        <div class="col-lg-12">
+        <div class="col-lg-12 shadow">
 
             @if (session('status'))
             <div class="alert alert-success" role="alert">
@@ -72,7 +77,7 @@
             </div>
             @endif
 
-            <div class="panel panel-default" style=" 
+            <div class="panel panel-default" style="
                     color:green;">
 
                 <div class="panel-heading">
@@ -267,6 +272,7 @@
                                 </div>
                                 @endif
 
+
                                 <div class="col col-md-6 {{ $errors->has('bank_account_owner') ? 'has-error' : '' }}">
                                     <label class="">{{ trans('cruds.accountInfo.fields.bank_account_owner') }}</label>
                                     <input type="text" class="form-control" value="{{ $accountinfo->account_owner->owner }}" disabled>
@@ -335,10 +341,11 @@
                             <input type="hidden" class="form-control" name="user_id" value="{{ $user_id }}">
                             <input type="hidden" class="form-control" name="app_number_id" value="{{ $general_info->id }}">
 
-                            <div class=" col col-md-4 my-2">
+                            <div class=" col col-md-3 my-2">
                                 <label class="form-check-label" for="profile">ছবি আপলোড করুন</label>
-                                <br><img id="blah1" onchange="validateMultipleImage('blah1')" alt="image" src="" height="180px" width="180px" onerror="this.onerror=null;this.src='https://www.jamiemaison.com/creating-a-simple-text-editor/placeholder.png';" required />
-                                <br><input type="file" class="mt-2" name="profile" onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0]); show(this)" accept=".jfif,.jpg,.jpeg,.png,.gif" required>
+                                <br>
+                                <img src="{!! asset('uploads/profile/' . auth()->user()->student_image) !!}" alt="image" height="180px" width="180px" required />
+                                <br><input type="hidden" class="mt-2" name="profile" value="{{ auth()->user()->student_image }}">
                                 @if ($errors->has('profile'))
                                 <span class="help-block" role="alert">{{ $errors->first('profile') }}</span>
                                 @endif
@@ -346,48 +353,35 @@
 
                             </div>
 
-                            <div class=" col col-md-4  my-2">
+                            <div class=" col col-md-3  my-2">
                                 <label class="form-check-label" for="sign">স্বাক্ষর আপলোড করুন</label>
-                                <br><img id="blah2" onchange="check()" alt="image" src="" height="80px" width="220px" onerror="this.onerror=null;this.src='https://www.jamiemaison.com/creating-a-simple-text-editor/placeholder.png';" required />
-                                <br><input type="file" class="mt-2" name="sign" onchange="document.getElementById('blah2').src = window.URL.createObjectURL(this.files[0]); show(this)" accept=".jfif,.jpg,.jpeg,.png,.gif" required>
+                                <br><img src="{!! asset('uploads/sign/' . auth()->user()->student_signature) !!}" alt="image" height="80px" width="220px" required />
+                                <br><input type="hidden" class="mt-2" name="sign" value="{{ auth()->user()->student_signature }}">
 
                             </div>
 
-                            <div class=" col col-md-4  my-2">
+                            <div class=" col col-md-3  my-2">
                                 <label class="form-check-label" for="brid">জন্ম নিবন্ধন আপলোড করুন</label>
-                                <br>
-                                <!-- <img id="blah3" onchange="validateMultipleImage('blah3')" alt="image" src="" height="180px" width="180px" onerror="this.onerror=null;this.src='https://www.jamiemaison.com/creating-a-simple-text-editor/placeholder.png';" required /> -->
-                                <img id="blah3" onchange="validateMultipleImage('blah3')" alt="image" src="" height="180px" width="180px" onerror="this.onerror=null;this.src='https://www.jamiemaison.com/creating-a-simple-text-editor/placeholder.png';" required />
-                                <!-- <img src="{{ asset('circular').'/'.$circular[0]->circular_image }}" width="100%" height="100%" /> -->
-                                <br><input type="file" class="mt-2" name="brid" onchange="document.getElementById('blah3').src = window.URL.createObjectURL(this.files[0]); show(this)" accept=".jfif,.jpg,.jpeg,.png,.gif" required>
+                                <br><img src="{!! asset('uploads/brid/' . auth()->user()->birth_certificate) !!}" alt="image" height="180px" width="180px" required />
+                                <br><input type="hidden" class="mt-2" name="brid" value="{{ auth()->user()->birth_certificate }}">
 
                             </div>
 
-                            <div class=" col col-md-4  my-2">
-                                <label class="form-check-label" for="father_nid">পিতার জাতীয় পরিচয়পত্র আপলোড
-                                    করুন</label>
-                                <br><img id="blah4" onchange="validateMultipleImage('blah4')" alt="image" src="" height="180px" width="180px" onerror="this.onerror=null;this.src='https://www.jamiemaison.com/creating-a-simple-text-editor/placeholder.png';" required />
-                                <br><input type="file" class="mt-2" name="father_nid" onchange="document.getElementById('blah4').src = window.URL.createObjectURL(this.files[0]); show(this)" accept=".jfif,.jpg,.jpeg,.png,.gif" required>
+                            <div class=" col col-md-3  my-2">
+                                <label class="form-check-label" for="father_nid">পিতার জাতীয় পরিচয়পত্র আপলোড </label>
+                                <br><img src="{!! asset('uploads/father_nid/' . auth()->user()->graduation_nid) !!}" alt="image" height="180px" width="180px" required />
+                                <br><input type="hidden" class="mt-2" name="father_nid" value="{{ auth()->user()->graduation_nid }}" required>
 
                             </div>
 
-                            <div class=" col col-md-4  my-2">
+                            {{-- <div class=" col col-md-4  my-2">
                                 <label class="form-check-label" for="testimonial">শিক্ষা প্রতিষ্ঠানের
                                     প্রত্যয়নপত্র</label>
-                                <br><img id="blah5" onchange="validateMultipleImage('blah5')" alt="image" src="" height="180px" width="180px" onerror="this.onerror=null;this.src='https://www.jamiemaison.com/creating-a-simple-text-editor/placeholder.png';" required />
+                                <br><img id="blah5" onchange="validateMultipleImage('blah5')" alt="image" src="" height="180px" width="180px"
+                                 onerror="this.onerror=null;this.src='https://www.jamiemaison.com/creating-a-simple-text-editor/placeholder.png';" required />
                                 <br><input type="file" class="mt-2" name="testimonial" onchange="document.getElementById('blah5').src = window.URL.createObjectURL(this.files[0]); show(this)" accept=".jfif,.jpg,.jpeg,.png,.gif" required>
 
-                            </div>
-
-                            <!-- <div class=" col col-md-4  my-2">
-                                    <label class="form-check-label" for="testimonial">সরকারী প্রতিষ্ঠানের প্রত্যয়নপত্র [যদি থাকে]</label>
-                                    <br><img id="blah5" onchange="validateMultipleImage('blah5')" alt="image" src="" height="180px" width="180px" onerror="this.onerror=null;this.src='https://www.jamiemaison.com/creating-a-simple-text-editor/placeholder.png';" required />
-                                    <br><input type="file" class="mt-2" name="testimonial" onchange="document.getElementById('blah5').src = window.URL.createObjectURL(this.files[0]); show(this)" accept=".jfif,.jpg,.jpeg,.png,.gif" required>
-
-                                </div> -->
-
-
-
+                            </div> --}}
 
                         </fieldset>
 
@@ -431,7 +425,7 @@
 <script type="text/javascript">
     function show(input) {
         debugger;
-        var validExtensions = ['jpg', 'png', 'jpeg', 'JPG', 'JPEG', 'PNG', 'bmp', 'BMP']; //array of valid extensions
+        var validExtensions = ['jpg', 'png', 'jpeg']; //array of valid extensions
         var fileName = input.files[0].name;
         var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
         if ($.inArray(fileNameExt, validExtensions) == -1) {
@@ -463,7 +457,5 @@
 <script src="{{ asset('js/bankBranchAjax.js') }}"></script>
 <script src="{{ asset('js/util.js') }}"></script>
 
-
-@endsection
 
 @endsection

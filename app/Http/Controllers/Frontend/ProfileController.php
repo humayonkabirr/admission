@@ -9,7 +9,6 @@ use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Image;
 
 class ProfileController extends Controller
 {
@@ -31,45 +30,8 @@ class ProfileController extends Controller
     public function update(UpdateProfileRequest $request)
     {
         $user = auth()->user();
-        $UserObj = User::where('id', $user->id)->first();
 
-        if ($request->hasfile('photo')) {
-            $file = $request->file('photo');
-            $extension = $file->getClientOriginalExtension();
-            $filename = $user->id . 'photo' . time() . '.' . $extension;
-            $destination = public_path('images/' . $filename);
-            //$destination = url('uploads/profile/' . $filename);
-            Image::make($file)->resize(600, 600, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($destination);
-            $request->photo = $filename;
-        }
-
-
-
-        if ($request->hasfile('sign')) {
-            $file = $request->file('sign');
-            $extension = $file->getClientOriginalExtension();
-            $filename = $user->id . 'sign' . time()  . '.' . $extension;
-            $destination = public_path('images/' . $filename);
-            Image::make($file)->resize(600, 200)
-                ->save($destination);
-            $request->sign = $filename;
-        }
-
-
-        $UserObj->photo = $request->photo;
-        $UserObj->sign = $request->sign;
-        $UserObj->name = $request->name;
-        $UserObj->email = $request->email;
-
-        //dd($UserObj);
-        $UserObj->update();
-
-
-
-        // $user->update($request->all());
-        //  $user->update($request->all());
+        $user->update($request->validated());
 
         return redirect()->route('frontend.profile.index')->with('message', __('global.update_profile_success'));
     }
