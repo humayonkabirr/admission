@@ -520,7 +520,6 @@
                                     <div class="invalid-feedback">{{trans('global.write_something')}}</div>
                                 </div>
 
-
                                 <div class="col-md-6 {{ $errors->has('last_study_class') ? 'has-error' : '' }}">
                                     <label class="required" for="last_study_class_id">{{ trans('cruds.educationInstituteInfo.fields.last_study_class') }}</label>
                                     <select class="form-control select2" name="last_study_class_id" id="last_study_class_id" required>
