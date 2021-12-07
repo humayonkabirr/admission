@@ -2,11 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Controllers\Traits\BanglaToEnglishConverterTrait;
 use Illuminate\Foundation\Http\FormRequest;
 use Gate;
 
 class StoreApplicationInfoRequest extends FormRequest
 {
+    use BanglaToEnglishConverterTrait;
     /**
      * 
      * Determine if the user is authorized to make this request.
@@ -26,8 +28,10 @@ class StoreApplicationInfoRequest extends FormRequest
      */
     public function rules()
     {
-        return [
 
+
+
+        return [
 
             'circular_id' => [
                 'required',
@@ -83,8 +87,6 @@ class StoreApplicationInfoRequest extends FormRequest
                 'required',
                 'numeric',
             ],
-
-
             'upazila_id' => [
                 'required',
                 'numeric',
@@ -101,8 +103,6 @@ class StoreApplicationInfoRequest extends FormRequest
                 'integer',
                 'required',
             ],
-
-
 
         ];
     }

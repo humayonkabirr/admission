@@ -7,12 +7,15 @@ body,
     font-family: "NikoshBAN", "SolaimanLipi", "Indie Flower", cursive;
 }
 .navbar {
-    background-color: #159397;
+    background-color: #fff;
+    max-height: 100px;
+    box-shadow: 1px 1px 6px #2a1562;
 }
 
 .navbar-light .navbar-nav .nav-link,
 .nav-item > .active > .nav-link {
-    color: #fff;
+    color:black;
+    font-size: 20px;
 }
 
 .form-control,
@@ -163,4 +166,15 @@ label {
     display: inline-block;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.navbar-collapse .collapse .show{
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-align: center;
+    align-items: center;
+    background: white;
+    text-align: right;
 }

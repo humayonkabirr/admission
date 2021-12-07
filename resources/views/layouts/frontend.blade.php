@@ -33,6 +33,7 @@
         body {
             min-height: 75rem;
             padding-top: 4.5rem;
+            background-image: url('{{ asset("assets/gov-bg.png") }}');
         }
 
         .navbar-brand .nav-link {
@@ -49,7 +50,28 @@
             background-color: white;
         }
 
+        .logo-lg {
+            margin-right: 30px;
+        }
 
+
+        /* table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
+            top: 8px;
+            left: 4px;
+            height: 16px;
+            width: 16px;
+            display: block;
+            position: absolute;
+            color: white;
+            border: 2px solid white;
+            border-radius: 16px;
+            text-align: center;
+            line-height: 14px;
+            box-shadow: 0 0 3px #444;
+            box-sizing: content-box;
+            content: '+';
+            background-color: #31b131;
+        } */
 
         /* End of loading Animation css */
     </style>
@@ -61,8 +83,10 @@
 
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light fixed-top bg-gray">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+            <a href="{{ url('/') }}" class="logo">
+                <span class="logo-lg">
+                    <img id="companyNameLogo" style="background-color: while !important;" src="{{asset('public/images/aams-logo-big.png')}}" alt="PMEAT LOGO">
+                </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -79,7 +103,7 @@
                     @endguest
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('frontend.application.applynow')}}">
+                        <a class="nav-link" id="applyLink" href="{{route('frontend.application.applynow')}}">
                             আবেদন করুন
                         </a>
                     </li>
@@ -275,7 +299,8 @@
                         </div>
                     </li>
 
-                    @endcan @can('setup_access')
+                    @endcan
+                    @can('setup_access')
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ trans('cruds.setup.title') }} <span class="caret"></span>
@@ -506,7 +531,40 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
-<script src="{{ asset('js/main.js') }}"></script>
+
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"></script>
+
+<!-- 
+<script src="{{ asset('js/main.js') }}"></script> -->
+<script src="  https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+@include('sweetalert::alert')
+
+<script>
+    $(document).ready(function() {
+        $('#app_list').DataTable();
+
+        $('#applyLink').click(function() {
+            // swal({
+            //     title: "Welcome in Alerts",
+            //     text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+            // });
+
+
+            confirm("heelo");
+
+
+
+        });
+
+
+    });
+</script>
+
+
 
 @yield('scripts')
 

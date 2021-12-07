@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://localhost/admission'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -161,20 +161,12 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
-        /*
-         * Package Service Providers...
-         */
-
-        /*
-         * Application Service Providers...
-         */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Nexmo\Laravel\NexmoServiceProvider::class,
         Hizbul\OnnorokomSms\OnnorokomSmsServiceProvider::class,
         iqbalhasandev\bulksmsbd\BulkSMSBDServiceProvider::class,
@@ -238,6 +230,7 @@ return [
         'nexmo' => Nexmo\Laravel\NexmoServiceProvider::class,
         'OnnoRokomSMS' => Hizbul\OnnorokomSms\Facades\OnnoRokomSMS::class,
         'BulkSMSBD' => iqbalhasandev\bulksmsbd\BulkSMSBDServiceProvider::class,
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
 
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
 
