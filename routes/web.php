@@ -310,7 +310,7 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     Route::get('/home', 'HomeController@index')->name('home');
 
     // Application   :: FOR ONLY APPLICATION SUBMISSION
-    Route::get('application/verify-documents', 'ApplicationController@verifyDocument')->name('application.verify');
+    Route::get('application/verify-documents/{id}', 'ApplicationController@verifyDocument')->name('application.verify');
     Route::post('application/verify-documents', 'ApplicationController@verifyDocumentSubmit')->name('application.verify.submit');
     Route::post('application/application-documents', 'ApplicationController@applicationDocument')->name('application');
     Route::get('application/apply/{id}', 'ApplicationController@apply')->name('application.apply');

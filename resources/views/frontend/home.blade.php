@@ -46,37 +46,41 @@
                             <td>{{ $application->created_at->format('h:s A | d F,Y') }}</td>
                             <td>
                                 @if($application->pemeat_selected == 1)
-                                Selected by PMEAT
-                                @elseif($application->pemeat_accepted == 1)
-                                Accepted by PMEAT
-                                @elseif($application->ih_forwarded == 1)
-                                Frowarded by Institute Head
-                                @elseif($application->ih_approve == 1)
-                                Approved by Institute Head
-                                @elseif($application->ih_seen == 1)
-                                Seen by Institute Head
-                                @elseif($application->is_submitted == 1)
-                                Submitted
-                                @elseif($application->is_completed == 1)
-                                Completed
-                                @else
-                                Pending
-                                @endif
+                                    Selected by PMEAT
+                                    @elseif($application->pemeat_accepted == 1)
+                                        Accepted by PMEAT
+                                        @elseif($application->ih_forwarded == 1)
+                                            Frowarded by Institute Head
+                                            @elseif($application->ih_approve == 1)
+                                                Approved by Institute Head
+                                                @elseif($application->ih_seen == 1)
+                                                    Seen by Institute Head
+                                                    @elseif($application->is_submitted == 1)
+                                                        Submitted
+                                                        @elseif($application->is_completed == 1)
+                                                            Completed
+                                                            @else
+                                                            Pending
+                                                            @endif
 
                             </td>
                             <td>
                                 @if(!empty($application->app_id->id) && $application->is_submitted != 1)
-                                <a type="button" href="{{ url('submit_document/'.$application->application_no) }}" class="badge badge-success">
-                                    Submit Document
-                                </a>
-                                @endif
+                                    <a type="button" href="{{ url('submit_document/'.$application->application_no) }}" class="badge badge-danger">
+                                        Submit Document
+                                    </a>
+                                    @elseif (!empty($application->app_id->id) && $application->is_submitted != 0 && $application->ih_approve != 1)
+                                    <a type="button" href="{{ url('application/verify-documents/'.$application->application_no) }}" class="badge badge-warning">
+                                        Submit Verify Document
+                                    </a>
+                                    @endif
                             </td>
                             <td>
                                 @if(!empty($application->app_id->id) && $application->is_submitted == 1)
-                                <a type="button" href="{{ url('download_pdf/'.$application->app_id->id) }}" class="btn btn-success">
-                                    <i class="fa fa-download" aria-hidden="true"></i>
-                                </a>
-                                @endif
+                                    <a type="button" href="{{ url('download_pdf/'.$application->app_id->id) }}" class="btn btn-success">
+                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                    </a>
+                                    @endif
                             </td>
                         </tr>
                         @endforeach
@@ -111,4 +115,20 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#contact-detail').dataTable({
+            "responsive": true,
+            "columnDefs": [{
+                    responsivePriority: 1,
+                    targets: 0
+                },
+                {
+                    responsivePriority: 2,
+                    targets: 4
+                }
+            ]
+        });
+    });
+</script>
 @endsection
