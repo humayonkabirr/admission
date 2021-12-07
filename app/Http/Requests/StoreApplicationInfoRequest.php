@@ -42,7 +42,7 @@ class StoreApplicationInfoRequest extends FormRequest
                 'min:17',
                 'max:17',
                 'required',
-                'unique:general_infos',
+                // 'unique:general_infos',
             ],
             'nid' => [
                 'string',

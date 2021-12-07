@@ -22,7 +22,6 @@ class HomeController
     public function index()
     {
         $apply_list = ApplicationTracking::where('user_id_no_id',auth()->user()->id)->latest()->get();
-        $checkSubmit = Document::where('name', 'pattern');
         //return $apply_list;
 
         $circular = '';

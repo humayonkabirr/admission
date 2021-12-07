@@ -19,6 +19,7 @@ use App\Models\Circular;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\http\Requests\StoreApplicationInfoRequest;
+use App\Http\Requests\StoreFrontendDocumentRequest;
 use App\Models\AccountInfo;
 use App\Models\EducationInstituteInfo;
 use App\Models\FamilyInfo;
@@ -215,7 +216,7 @@ class ApplicationController extends Controller
 
 
     //developing in progress.........
-    public function document(Request $req)
+    public function document(StoreFrontendDocumentRequest $req)
     {
         //return $req;
         $item = new Document();
@@ -249,7 +250,6 @@ class ApplicationController extends Controller
         $app_tracking = ApplicationTracking::where('application_no', $general_info->application_no)->first();
         $app_tracking->is_submitted = '1';
         $app_tracking->update();
-
 
         return view('frontend.application.application_success', $data);
     }
@@ -476,8 +476,12 @@ class ApplicationController extends Controller
           $extension = $file->getClientOriginalExtension();
           $filename = time() . '.' . $extension;
 
-          Image::make($file)->resize(600, 600)
-              ->save('uploads/profile/' . $filename, 100);
+          Image::make($file)->resize(500, 500, function ($constraint) {
+              $constraint->aspectRatio();
+          })->save('uploads/profile/' . $filename, 100);
+
+          // Image::make($file)->resize(600, 600)
+          //     ->save('uploads/profile/' . $filename, 100);
 
           $item->student_image = $filename;
       }
@@ -538,32 +542,39 @@ class ApplicationController extends Controller
       return redirect()->route('frontend.application.applynow');
     }
 
-    public function verifyDocument()
+    public function verifyDocument($id)
     {
-      return view('frontend.application.verify_document');
+      return view('frontend.application.verify_document')->with('application_no', $id);
     }
 
-    // Recommended Application Scan Copy submitted 
-    public function verifyDocumentSubmit()
+    public function verifyDocumentSubmit(Request $req)
     {
-     
-      if ($req->hasfile('father_nid')) {
-          $destination = 'uploads/father_nid/' . $req->father_nid;
+      $item = User::where('id', Auth::user()->id)->first();
+
+      if ($req->hasfile('recommended ')) {
+          $destination = 'uploads/recommended /' . $req->recommended ;
+
           if (File::exists($destination)) {
               File::delete($destination);
           }
 
-          $file = $req->file('father_nid');
+          $file = $req->file('recommended ');
 
           $extension = $file->getClientOriginalExtension();
           $filename = time() . '.' . $extension;
 
           Image::make($file)->resize(600, 600)
-              ->save('uploads/father_nid/' . $filename, 100);
+              ->save('uploads/recommended /' . $filename, 100);
 
-          $item->graduation_nid = $filename;
+          $item->testimonial = $filename;
       }
-      return back();
+      $app_tracking = ApplicationTracking::where('application_no', $req->application_no)->first();
+      $app_tracking->ih_seen = '1';
+      $app_tracking->ih_approve = '1';
+      $app_tracking->ih_forwarded = '1';
+      $app_tracking->update();
+
+      return redirect()->route('frontend.application.applynow');
     }
 
     public function submit_document($id)

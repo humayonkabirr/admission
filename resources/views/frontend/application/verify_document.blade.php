@@ -84,14 +84,24 @@
                             @endforeach
                             @endif
 
-                            <div class=" col col-md-6 my-2">
-                                <label class="form-check-label" for="profile">আবেদন কপি আপলোড করুন</label>
+                            <input type="hidden" name="application_no" value="{{ $application_no}}">
+
+                            <div class=" col col-md-4 my-2">
+                                <label class="form-check-label" for="recommended">আবেদন কপি আপলোড করুন</label>
                                 <br><img id="blah1" onchange="validateMultipleImage('blah1')" alt="image" src="" height="180px" width="180px"
                                  onerror="this.onerror=null;this.src='https://www.jamiemaison.com/creating-a-simple-text-editor/placeholder.png';" required />
-                                <br><input type="file" class="mt-2" name="profile" onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0]); show(this)" accept=".jfif,.jpg,.jpeg,.png,.gif" required>
-                                @if ($errors->has('profile'))
-                                <span class="help-block" role="alert">{{ $errors->first('profile') }}</span>
+                                <br><input type="file" class="mt-2" name="recommended" onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0]); show(this)" accept=".jfif,.jpg,.jpeg,.png,.gif" required>
+                                @if ($errors->has('recommended'))
+                                <span class="help-block" role="alert">{{ $errors->first('recommended') }}</span>
                                 @endif
+                            </div>
+
+                            <div class=" col col-md-8 my-2">
+                                <label class="form-check-label">নোটঃ </label>
+                                <p>
+                                    আবেদন প্রক্রিয়া সম্পন্ন হওয়ার পূর্বে প্রয়োজন
+                                    হলে সংরক্ষণ করা যায় এবং পরবর্তীতে সেবা ব্যবস্থাপনা অপশন হতে ড্রাফট আবেদন পুনরায় শুরু করা যাবে।
+                                </p>
                             </div>
                         </fieldset>
 
